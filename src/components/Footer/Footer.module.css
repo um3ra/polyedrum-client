@@ -1,0 +1,48 @@
+.footer{
+    background-color: #F5F5F5;
+}
+
+.footerContainer{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 1em;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.footerBlock{
+}
+
+.signInForm{
+    display: flex;
+    padding-top: 100px;
+}
+
+.socialMedia{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
+}
+
+.socialMediaLink{
+    padding: 10px;
+    transition: all .3s;
+}
+
+.socialMediaLink:hover {
+    color: #48CCCD;
+}
+
+.footerLogo{
+    position: relative;
+    text-align: center;
+
+    padding-top: .5em;
+}
+
+@media only screen and (max-width: 768px){
+    .footer{
+        display: none;
+    }
+}
+

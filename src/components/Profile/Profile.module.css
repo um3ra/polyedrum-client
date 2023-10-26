@@ -1,0 +1,83 @@
+.userProfileBlock{
+    display: flex;
+    padding: 200px 10%;
+    justify-content: space-evenly;
+}
+
+.userProfileContentTitle{
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.userProfileContentRole{
+    font-size: .7em;
+}
+
+.userProfileContent{
+    width: 50%;
+}
+
+.userProfileContentTitle>span{
+    position: relative;
+    color: var(--dark-grey-blue);
+    font-weight: 700;
+    font-style: italic;
+
+}
+
+.userProfileNavBar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: #AACDDD;
+    height: 15em;
+}
+
+.userProfileNavBar a{
+    transition: all .3s;
+    line-height: 1.6em;
+    padding-left: 20px;
+    margin-right: 20px;
+}
+
+.userProfileNavBar a:hover{
+    color: var(--white);
+    background-color: var(--dark-grey-blue);
+}
+
+.userProfileContentForm div{
+    padding: 5px 0;
+}
+
+.userProfileContentOrders{
+    height: 400px;
+    overflow-y: scroll;
+}
+.userProfileContentOrders>li{
+
+    padding: 5px 0;
+}
+
+.ordersItem{
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgba(203,203,203,0.31);
+    transition: all .3s;
+}
+
+.ordersItem:hover{
+    background-color: #AACDDD;
+}
+
+.currentOrdersItem{
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    cursor: pointer;
+}
+
+.currentOrdersItem span{
+    font-weight: 700;
+}

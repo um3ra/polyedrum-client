@@ -1,0 +1,110 @@
+.adminBlock{
+    display: flex;
+    margin: 200px auto !important;
+    box-sizing: border-box;
+    background-color: rgba(118,166,193,0.13);
+}
+
+.adminContent{
+    display: flex;
+    overflow: auto;
+    margin: 0 auto;
+}
+
+.adminContent>form{
+    margin: 0 auto;
+}
+
+.adminInnerContent::-webkit-scrollbar{
+}
+
+.adminNav{
+    padding: 20px;
+    background-color: #AACDDD;
+}
+
+.adminNav li {
+    width: 100%;
+}
+
+.adminInnerContent{
+    display: flex;
+    overflow: auto;
+}
+
+.adminContentBtns{
+    color: var(--white);
+    background-color: var(--dark-grey-blue);
+}
+
+.adminContentBtns>div{
+    width: 100px;
+    text-align: center;
+}
+
+
+.adminContentBtns button{
+    border-radius: 10px;
+    transition: all .4s;
+    margin: 0 2px;
+}
+
+.adminContent>li{
+    padding: 0 10px;
+}
+
+.adminContentList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.adminContentList>li{
+    /*border: 1px solid black;*/
+    border-top: 1px solid black;
+    text-align: center;
+    padding: 20px;
+    white-space: nowrap;
+}
+
+.adminContentList img{
+    width: 100%;
+    height: 100%;
+}
+
+.adminContentList input{
+    padding: 0;
+    width: 100%;
+}
+
+.adminContentBtnsDelete:hover{
+    background-color: #B70E1C;
+}
+.adminContentBtnsEdit:hover{
+    background-color: #298145;
+}
+
+.adminContentList>li:first-child{
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.adminNavItemActive{
+    border-radius: 5px;
+    background-color: var(--dark-grey-blue);
+    color: var(--white) !important;
+}
+
+.adminContentForm{
+    height: 100vh;
+    width: 100%;
+    color: var(--white);
+    background-color: var(--dark-grey-blue) !important;
+}
+
+.adminContentFormBlock p{
+    padding-top: 2em;
+}
+
+.adminContentFormButton{
+    margin: 50px 0;
+}

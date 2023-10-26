@@ -1,0 +1,69 @@
+.facetContainer{
+    background-color: #F8F8F8;
+    width: 26em;
+    min-width: 16em;
+    border-radius: 5px;
+    border: var(--moonstone-blue) 2px solid;
+    margin: 0 auto;
+}
+.select{
+    padding-left: 20px;
+}
+.facet{
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid rgba(203,203,203,0.89);
+}
+
+.facetList>ul{
+    padding: 20px;
+}
+
+.facetList{
+    opacity: 0;
+    max-height: 0;
+    transition: all .5s linear;
+    overflow-y: auto;
+}
+
+.facetListEnterActive{
+    opacity: 0;
+    overflow-y: hidden;
+    max-height: 7.6em;
+}
+
+.facetListEnterDone{
+    max-height: 7.6em;
+    opacity: 1;
+    transition: all .1s linear;
+    margin-left: 2em;
+}
+
+.facetListExitActive{
+    overflow-y: hidden;
+    opacity: 0;
+    max-height: 0;
+    transition: all .1s linear;
+}
+
+.facetListExitDone{
+    opacity: 1;
+    max-height: 7.6em;
+}
+
+.facetCollapseButton{
+    transform: scale(1, 1);
+    transition: all .2s linear;
+}
+
+.facetCollapseButton.active{
+    transform: scale(1, -1);
+}
+
+@media only screen and (max-width: 992px){
+    .facetContainer{
+        width: 60%;
+    }
+}

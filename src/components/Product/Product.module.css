@@ -1,0 +1,76 @@
+.collectionCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s;
+    margin: 30px auto;
+    width: 12.5em;
+}
+
+.collectionCardBlock{
+    text-align: center;
+    width: 100%;
+}
+
+.collectionCard:hover .collectionCardImage>img{
+    transition: all .3s;
+    transform: scale(1.1);
+}
+
+.collectionCard:hover{
+    box-shadow: 0 0 10px var(--grey);
+}
+
+.collectionCardImage{
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 17.4em;
+}
+
+.collectionCardImage>img{
+    transition: all .3s;
+    width: 100%;
+    height: 100%;
+}
+
+.collectionCardTitle{
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+
+    height: 3.2em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+.collectionCardPrice{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.collectionCard:hover:hover .collectionCardBtn{
+    opacity: 1;
+    transition: all .3s;
+}
+
+.collectionCardBtn{
+    display: flex;
+    opacity: 0;
+    font-size: 1.3em !important;
+    font-weight: 800;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 20px 0 !important;
+    width: 100% !important;
+    transition: all .3s;
+    justify-content: center;
+    align-items: center;
+}
+
+.collectionCardBtn>span{
+    padding-left: 8px;
+}

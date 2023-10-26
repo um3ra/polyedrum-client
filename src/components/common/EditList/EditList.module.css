@@ -1,0 +1,12 @@
+.editList{
+    height: 100px;
+    background-color: var(--white);
+    color: black;
+    overflow-y: auto;
+    width: 200px;
+}
+.editList>li{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 .5em;
+}

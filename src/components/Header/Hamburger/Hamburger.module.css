@@ -1,0 +1,97 @@
+.hamburger{
+    color: var(--white);
+}
+
+.hamburgerIcon{
+    position: relative;
+    cursor: pointer;
+    z-index: 201;
+}
+
+.hamburgerMenu{
+    line-height: 1.7;
+    position: absolute;
+    background-color: rgba(15,55,69,0.80);
+    top: 134px;
+    right: 0;
+    width: 50%;
+    z-index: 201;
+    box-sizing: border-box;
+    padding: 0 2em;
+    transition: all .8s;
+    max-height: 0;
+    border-radius: 0 0 0 5px;
+    min-width: 16em;
+}
+
+.hamburgerMenu>div{
+    opacity: 0;
+}
+
+.hamburgerMenu a{
+    color: var(--white);
+}
+
+.hamburgerMenuListTitle{
+    border-bottom: 1px solid var(--white);
+    cursor: pointer;
+}
+
+.hamburgerMenuListItem{
+    transition: all .3s ease;
+    cursor: pointer;
+    line-height: 2;
+}
+
+.hamburgerMenuListItem>span{
+    padding-left: .5em;
+}
+
+.hamburgerMenuListItem:hover{
+    background-color: var(--white);
+}
+
+.hamburgerMenuListItem:hover{
+    color: #072E33;
+}
+
+.hamburgerMenuBtn{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.hamburgerMenuBtn button{
+    background-color: rgba(15,55,69,0.30);
+    border: 1px var(--white) solid;
+    color: var(--white);
+    margin: 1em 2em;
+}
+
+.hamburgerMenuOverlay{
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 200;
+}
+
+.hamburgerMenuEnterActive{
+    max-height: 100%;
+}
+.hamburgerMenuEnterDone{
+    max-height: 100%;
+}
+.hamburgerMenuExitActive{
+    max-height: 0;
+}
+.hamburgerMenuExit{
+    max-height: 100%;
+}
+.hamburgerMenuEnterActive>div{
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+.hamburgerMenuEnterDone>div{
+    opacity: 1;
+}

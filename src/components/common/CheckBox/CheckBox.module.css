@@ -1,0 +1,33 @@
+.checkbox{
+    display: flex;
+    font-size: .9em;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox:active .checkboxItem{
+    transform: scale(1.6);
+}
+
+.checked{
+    background: rgb(82,207,208);
+    background: radial-gradient(circle, rgba(82,207,208,1) 0%, rgba(248,248,248,1) 75%, rgba(248,248,248,1) 78%);
+}
+
+.checkedTitle{
+    color: var(--turquoise);
+
+}
+
+.checkboxItem{
+    width: 15px;
+    height: 15px;
+    border: 1px var(--turquoise) solid;
+    border-radius: 50%;
+    transition: all .4s;
+}
+
+.title{
+    padding-left: 10px;
+    transition: all .4s;
+}

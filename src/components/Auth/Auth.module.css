@@ -1,0 +1,30 @@
+.loginForm{
+    text-align: center;
+}
+
+.loginFormTitle{
+    font-size: 1.5em;
+    font-weight: 700;
+    padding: 1em 0;
+}
+
+.loginFormItem{
+    padding: 10px;
+}
+
+.loginFormItem input{
+    width: 20%;
+    min-width: 200px;
+}
+
+.loginFormItem>a{
+    width: 30%;
+}
+
+.loginFormLinks{
+    display: flex;
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: .8em;
+    justify-content: space-between;
+}

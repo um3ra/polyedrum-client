@@ -1,0 +1,93 @@
+.primaryNavigationItem{
+    padding: 20px 0;
+    transition: .2s linear;
+    z-index: 100;
+}
+
+.primaryNavigationItem>a{
+    position: relative;
+    padding: 20px;
+    width: 100%;
+}
+.primaryNavigationItem>a:hover::after{
+    width: 100%;
+    position: absolute;
+    background-color: var(--dark-grey-blue);
+}
+
+.primaryNavigationItem>a::after{
+    content: "";
+    width: 0;
+    top: 0;
+    left: 0;
+    transition: all .3s;
+    height: 5px;
+}
+
+.primaryNavigationItem>a::before{
+    position: absolute;
+    content: "";
+    width: 0;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+}
+
+.primaryNavigationItem>a:hover::before{
+    width: 100%;
+    background-color: var(--dark-grey-blue);
+    transition: all .3s;
+}
+
+.primaryNavigationItem{
+    content: "";
+}
+
+.subNavigation{
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    list-style: none;
+    line-height: 1.8;
+    padding: 30px 10px;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    box-shadow: 0 0 10px var(--grey);
+
+
+}
+
+.subNavigationTitle{
+    font-size: 1.2em;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.subNavigationList a{
+    color: var(--grey);
+}
+.subNavigationList a:hover{
+    color: var(--turquoise);
+}
+
+.subNavigationEnterActive{
+    opacity: 0;
+}
+
+.subNavigationEnterDone{
+    opacity: 1;
+    transition: all .3s;
+    z-index: 100;
+}
+.subNavigationExitDone{
+    opacity: 1;
+}
+.subNavigationExitActive{
+    opacity: 0;
+    transition: all .3s;
+    z-index: 100;
+}
+

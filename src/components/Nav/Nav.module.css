@@ -1,0 +1,24 @@
+.mainNav{
+    background-color: var(--moonstone-blue);
+    position: relative;
+}
+
+.primaryNavigation{
+    display: flex;
+    justify-content: space-around;
+    min-width: 500px;
+    margin: 0 auto;
+    list-style: none;
+    color: var(--dark-grey-blue);
+}
+.primaryNavigation a{
+    text-decoration: none;
+    color: var(--dark-grey-blue);
+}
+
+
+@media only screen and (max-width: 768px){
+    .mainNav{
+        display: none;
+    }
+}

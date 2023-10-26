@@ -1,0 +1,143 @@
+.cartOverlay{
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(15,55,69,0.44);
+    z-index: 200;
+}
+
+.cartInner{
+    position: absolute;
+    background-color: var(--white);
+    top: 100%;
+    right: 50%;
+    z-index: 1000;
+    width: 25em;
+    box-shadow: 1px 1px 10px 0 var(--grey);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.cartTitle{
+    text-align: center;
+}
+
+.cartContainer{
+    position: relative;
+}
+
+.cartList{
+    overflow-y: auto;
+    /*height: 500px;*/
+    height: 25em;
+}
+
+.cartBlock{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cartBlockIcon{
+    position: relative;
+    cursor: pointer;
+    z-index: 201;
+}
+
+.cartBlock button{
+    width: 45%;
+    font-size: 1.5em;
+    font-weight: 700;
+    border: 0;
+    color: var(--white);
+    margin: 0 0.2em;
+}
+
+.cartBlock button:hover{
+    color: #000;
+}
+
+.cartInfo{
+    font-size: 1.2em;
+    font-weight: 600;
+
+}
+
+.cartProduct{
+    display: flex;
+    margin: 20px 0;
+    align-items: center;
+    justify-content: space-around;
+    background: linear-gradient(200deg, rgba(255,255,255,1) 30%, rgba(221,221,221,1) 100%);
+    transition: all .3s;
+}
+
+.cartProduct.remove{
+    transition: all .3s;
+    box-shadow: 0 0 22px 0 #B70E1C;
+    transform: scale(0.95);
+}
+
+.cartProduct.remove div{
+    filter: grayscale(100%);
+}
+
+.cartProductBtn{
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.cartProductBtn:active{
+    transform: scale(1.2);
+}
+
+.cartProductImage{
+    width: 30%;
+}
+
+.cartProductImage>img{
+    width: 100%;
+}
+
+.cartEnterActive{
+    opacity: 0;
+    transform: scale(0.8);
+    z-index: 1000;
+}
+
+.cartEnterDone {
+    position: absolute;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity .3s, transform .3s;
+    z-index: 1000;
+}
+
+.cartExit {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.cartExitActive {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity .3s, transform .3s;
+    z-index: 1000;
+}
+
+.cartListEmpty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.6em;
+    font-weight: 600;
+    color: rgba(121,121,121,0.44);
+}
+
+.cartContent{
+    color: black;
+    background-color: var(--white);
+}
