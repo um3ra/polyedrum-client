@@ -1,3 +1,8 @@
+.adminContentWrapper{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 .adminBlock{
     display: flex;
     margin: 200px auto !important;
@@ -59,7 +64,6 @@
     justify-content: space-around;
 }
 .adminContentList>li{
-    /*border: 1px solid black;*/
     border-top: 1px solid black;
     text-align: center;
     padding: 20px;
