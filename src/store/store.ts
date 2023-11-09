@@ -10,6 +10,7 @@ import {persistReducer, persistStore,
     PURGE,
     REGISTER,} from "redux-persist";
 import storage from 'redux-persist/lib/storage'
+import {useDispatch} from "react-redux";
 
 
 const persistConfig = {
@@ -33,10 +34,14 @@ const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: {
-            ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         }
     }).concat(rootAPI.middleware),
     devTools: true,})
 
 export const persistor = persistStore(store);
 export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
