@@ -1,21 +1,22 @@
 import {rootAPI} from "../api/rootAPI";
+import {IGenre} from "../../@types/genreType";
 
 
 const genreAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getGenres: build.query({
+        getGenres: build.query<IGenre, null>({
             query() {
                 return 'genres'
             },
             providesTags: ['Genre'],
         }),
-        getGenreByName: build.query({
+        getGenreByName: build.query<IGenre, string>({
             query(name) {
                 return `/genres/${name}`
             }
         }),
         createGenre: build.mutation({
-            query(data) {
+            query(data: IGenre) {
                 return {
                     url: 'genres/create',
                     method: 'POST',
@@ -25,7 +26,7 @@ const genreAPI = rootAPI.injectEndpoints({
             invalidatesTags: ['Genre'],
         }),
         updateGenre: build.mutation({
-            query({name, data}) {
+            query({name, data}: {name: string, data: IGenre}) {
                 return {
                     url: `genres/${name}`,
                     method: 'PUT',
@@ -35,7 +36,7 @@ const genreAPI = rootAPI.injectEndpoints({
             invalidatesTags: ['Genre'],
         }),
         deleteGenreByName: build.mutation({
-            query(name) {
+            query(name: string) {
                 return {
                     url: `/genres/${name}`,
                     method: 'DELETE',
