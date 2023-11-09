@@ -1,8 +1,9 @@
 import {rootAPI} from "../api/rootAPI";
+import {IOrder} from "../../@types/orderType";
 
 const orderAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getUserOrders: build.query({
+        getUserOrders: build.query<IOrder[], null>({
             query() {
                 return "orders/user"
             },
