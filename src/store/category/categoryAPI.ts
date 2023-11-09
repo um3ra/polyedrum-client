@@ -1,15 +1,16 @@
 import {rootAPI} from "../api/rootAPI";
+import {ICategory} from "../../@types/categoryType";
 
 const categoryAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getCategories: build.query({
+        getCategories: build.query<ICategory, null>({
             query() {
                 return 'categories'
             },
             providesTags: ['Category'],
         }),
 
-        getCategoryByName: build.query({
+        getCategoryByName: build.query<ICategory, string>({
             query(name) {
                 return `categories/${name}`
             },
@@ -17,7 +18,7 @@ const categoryAPI = rootAPI.injectEndpoints({
         }),
 
         deleteCategoryByName: build.mutation({
-            query(name) {
+            query(name: string) {
                 return {
                     url: `categories/${name}`,
                     method: 'DELETE'
@@ -27,7 +28,7 @@ const categoryAPI = rootAPI.injectEndpoints({
         }),
 
         updateCategoryByName: build.mutation({
-            query({name, categoryData}) {
+            query({name, categoryData}: {name: string, categoryData: ICategory}) {
                 return {
                     url: `categories/${name}`,
                     method: 'PUT',
@@ -38,7 +39,7 @@ const categoryAPI = rootAPI.injectEndpoints({
         }),
 
         createCategory: build.mutation({
-            query(categoryData) {
+            query(categoryData: ICategory) {
                 return {
                     url: 'categories',
                     method: 'POST',
@@ -50,7 +51,7 @@ const categoryAPI = rootAPI.injectEndpoints({
         }),
 
         addGenreToCategory: build.mutation({
-            query({category, genre}) {
+            query({category, genre}: {category: string, genre: string}) {
                 return {
                     url: `categories/${category}?genre=${genre}`,
                     method: 'POST',
@@ -60,7 +61,7 @@ const categoryAPI = rootAPI.injectEndpoints({
         }),
 
         deleteGenreFromCategory: build.mutation({
-            query({category, genre}) {
+            query({category, genre}: {category: string, genre: string}) {
                 return {
                     url: `categories/${category}/genre/${genre}`,
                     method: 'PUT'
