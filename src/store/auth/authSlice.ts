@@ -1,4 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IAuthState} from "../../@types/userType";
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -6,9 +7,10 @@ export const authSlice = createSlice({
         token: null,
         isLoggedIn: false,
         email: null,
-    },
+    } as IAuthState,
+
     reducers: {
-        setAuthData: (state, {payload}) => {
+        setAuthData: (state, {payload}: PayloadAction<string>) => {
             state.token = payload;
             state.isLoggedIn = true;
         },
@@ -16,12 +18,9 @@ export const authSlice = createSlice({
             state.isLoggedIn = false;
             state.token = null;
         },
-        setMessage: (state, {payload}) => {
-            state.message = payload;
-        }
     },
 })
 
 export default authSlice.reducer;
 
-export const {setMessage, setAuthData, resetAuthData} = authSlice.actions;
+export const {setAuthData, resetAuthData} = authSlice.actions;

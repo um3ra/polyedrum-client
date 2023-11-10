@@ -16,3 +16,9 @@ export interface IProfile extends IUser{
     bucket: ICart
     role: EnumRole
 }
+
+export interface IAuthState {
+    token: string | null,
+    isLoggedIn: boolean,
+    email: string | null,
+}
