@@ -1,11 +1,12 @@
 import {rootAPI} from "../api/rootAPI";
+import {IProfile, IUser} from "../../@types/userType";
 
 
-const userApi = rootAPI.injectEndpoints({
+const userAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
 
         login: build.mutation({
-            query(body) {
+            query(body: IUser) {
                 return {
                     url: '/auth/login',
                     method: 'POST',
@@ -15,7 +16,7 @@ const userApi = rootAPI.injectEndpoints({
         }),
 
         register: build.mutation({
-            query(body) {
+            query(body: IUser) {
                 return {
                     url: '/auth/register',
                     method: 'POST',
@@ -24,14 +25,11 @@ const userApi = rootAPI.injectEndpoints({
             }
         }),
 
-        getUserProfile: build.query({
+        getUserProfile: build.query<IProfile, null>({
             query() {
                 return {
                     url: 'user/profile',
                     method: 'GET',
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`
-                    }
                 }
             },
 
@@ -39,26 +37,20 @@ const userApi = rootAPI.injectEndpoints({
         }),
 
         updateUserData: build.mutation({
-            query({id, ...body}) {
+            query({id, body}: {id: number, body: IUser}) {
                 return {
                     url: `user/${id}`,
                     method: "PUT",
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`
-                    },
                     body
                 }
             },
             invalidatesTags: ['User'],
         }),
-        getUsers: build.query({
+        getUsers: build.query<IUser[], null>({
             query() {
                 return {
                     url: "/user",
                     method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`
-                    },
                 }
             }
         })
@@ -72,4 +64,4 @@ export const {
     useUpdateUserDataMutation,
     useLoginMutation,
     useRegisterMutation
-} = userApi;
+} = userAPI;
