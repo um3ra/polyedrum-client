@@ -1,4 +1,14 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {
+    EnumOrder,
+    EnumSort,
+    ICurrentSelection,
+    IGetAllProductsParams,
+    IPagination,
+    IProductsResponse,
+    IProductsState
+} from "../../@types/productType";
+import {RootState} from "../store";
 
 const productsSlice = createSlice({
     name: 'products',
@@ -10,8 +20,8 @@ const productsSlice = createSlice({
                 selectionName: null,
                 selectionType: null,
             },
-            order: "ASC",
-            sort: "title",
+            order: EnumOrder.ASC,
+            sort: EnumSort.TITLE,
             pagination: {
                 pageNo: 0,
                 pageSize: 9,
@@ -19,15 +29,16 @@ const productsSlice = createSlice({
                 totalPages: null,
             },
         },
-    },
+    } as IProductsState,
+
     reducers: {
-        toggleCurrentSelection(state, {payload}){
+        toggleCurrentSelection(state, { payload }: PayloadAction<ICurrentSelection>){
             state.filter.currentSelection = payload;
         },
-        setPaginationData(state, {payload}){
+        setPaginationData(state, { payload }: PayloadAction<IPagination>){
             state.filter.pagination = payload;
         },
-        setSortData(state, {payload}){
+        setSortData(state, { payload }: PayloadAction<{order: EnumOrder, sort: EnumSort}>){
             const {order, sort} = payload;
             state.filter = {...state.filter, order, sort};
         },
@@ -38,7 +49,6 @@ const productsSlice = createSlice({
         })
         builder.addCase(getAllProducts.fulfilled, (state, {payload}) => {
             state.productList = payload;
-            state.message = null;
             state.loading = false;
         })
         builder.addCase(getAllProducts.rejected, (state) => {
@@ -47,9 +57,9 @@ const productsSlice = createSlice({
     }
 })
 
-export const getAllProducts = createAsyncThunk("products/getAllProducts", async ({name='', sortType='', pageNo=''}, thunkAPI) => {
+export const getAllProducts = createAsyncThunk("products/getAllProducts", async ({name = '', sortType = '', pageNo = 0}: IGetAllProductsParams, thunkAPI) => {
     try{
-        const filterData = thunkAPI.getState().products.filter;
+        const filterData = (thunkAPI.getState() as RootState).products.filter;
         const {pagination, currentSelection, sort, order} = filterData;
         let params = `?pageNo=${pageNo}&pageSize=${pagination.pageSize}&order=${order}&sort=${sort}`;
         let queryName = name;
@@ -61,7 +71,8 @@ export const getAllProducts = createAsyncThunk("products/getAllProducts", async 
             queryType = currentSelection.selectionType;
             params = `/${queryType}/${queryName}${params}`
         }
-        const { data } = await (await fetch(process.env.REACT_APP_API_URL + `/products${params}`)).json();
+        const { data }: {data: IProductsResponse} =
+            await (await fetch(process.env.REACT_APP_API_URL + `/products${params}`)).json();
 
         const paginationData = {
             pageNo: data.pageNo,

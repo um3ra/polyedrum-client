@@ -1,22 +1,23 @@
 import {rootAPI} from "../api/rootAPI";
+import {IAuthor, IProductsItem} from "../../@types/productType";
 
 const productsAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getProductByName: build.query({
+        getProductByName: build.query<IProductsItem, string>({
             query(name) {
                 return `/products/${name}`
             },
             providesTags: ['Product'],
         }),
 
-        getAllProductAuthors: build.query({
+        getAllProductAuthors: build.query<IAuthor[], null>({
             query() {
                 return '/products/author/all'
             }
         }),
 
         createProduct: build.mutation({
-            query(body) {
+            query(body: IProductsItem) {
                 return {
                     url: '/products/create',
                     method: 'POST',
@@ -24,8 +25,9 @@ const productsAPI = rootAPI.injectEndpoints({
                 }
             },
         }),
+
         uploadProductImage: build.mutation({
-            query({img, product}) {
+            query({img, product}: {img: string, product: string}) {
                 const formData = new FormData();
                 formData.append('image', img);
                 formData.append('product', product);
@@ -40,7 +42,7 @@ const productsAPI = rootAPI.injectEndpoints({
         }),
 
         deleteProduct: build.mutation({
-            query(id) {
+            query(id: number) {
                 return {
                     url: `/products/${id}`,
                     method: 'DELETE',
@@ -49,7 +51,7 @@ const productsAPI = rootAPI.injectEndpoints({
         }),
 
         updateProduct: build.mutation({
-            query({id, productData}) {
+            query({id, productData}: {id: number, productData: IProductsItem}) {
                 return {
                     url: `products/update/${id}`,
                     method: 'PUT',
@@ -59,7 +61,7 @@ const productsAPI = rootAPI.injectEndpoints({
         }),
 
         addProductToGenre: build.mutation({
-            query({name, genre}) {
+            query({name, genre}: {name: string, genre: string}) {
                 return {
                     url: `products/${name}?genre=${genre}`,
                     method: 'POST',
@@ -67,8 +69,9 @@ const productsAPI = rootAPI.injectEndpoints({
             },
             invalidatesTags: ['Product'],
         }),
+
         deleteGenreFromProduct: build.mutation({
-            query({product, genre}) {
+            query({product, genre}: {product: string, genre: string}) {
                 return {
                     url: `products/${product}/genre/${genre}`,
                     method: 'PUT',
