@@ -2,8 +2,14 @@ import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {CSSTransition} from "react-transition-group";
 import styles from "./SubNavigation.module.css";
+import {IGenre} from "../../../@types/genreType";
 
-const SubNavigation = ({genres, title}) => {
+interface SubNavigationProps {
+    genres: IGenre[]
+    title: string
+}
+
+const SubNavigation: React.FC<SubNavigationProps> = ({genres, title}) => {
     const [showNav, setShowNav] = useState(false);
     const [isExit, setIsExit] = useState(true);
 

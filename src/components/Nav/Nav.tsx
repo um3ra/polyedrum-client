@@ -4,8 +4,8 @@ import {useGetCategoriesQuery} from "../../store/category/categoryAPI";
 import SubNavigation from "./SubNavigation/SubNavigation";
 
 
-const Nav = () => {
-    const {data: categoryData} = useGetCategoriesQuery();
+const Nav: React.FC = () => {
+    const {data: categoryData} = useGetCategoriesQuery(null);
     return (
         <div className={styles.mainNav}>
             <nav>

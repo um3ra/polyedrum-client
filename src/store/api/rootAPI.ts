@@ -1,6 +1,12 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {RootState} from "../store";
 
+export interface APIResponse<T>{
+    data: T
+    http: string
+    message: string
+}
+
 export const rootAPI = createApi({
     reducerPath: 'root',
     tagTypes:

@@ -1,9 +1,9 @@
-import {rootAPI} from "../api/rootAPI";
+import {APIResponse, rootAPI} from "../api/rootAPI";
 import {ICategory} from "../../@types/categoryType";
 
 const categoryAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getCategories: build.query<ICategory, null>({
+        getCategories: build.query<APIResponse<ICategory[]>, null>({
             query() {
                 return 'categories'
             },
