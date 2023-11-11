@@ -1,7 +1,15 @@
 import React from 'react';
 import styles from './Textarea.module.css'
 
-const Textarea = ({register, height, error, children, ...props}) => (
+interface TextAreaProps
+    extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
+    register?: any
+    height?: number
+    error?: string
+    children?: React.ReactNode
+}
+
+const Textarea: React.FC<TextAreaProps> = ({register, height, error, children, ...props}) => (
     <>
         <textarea {...register}
                   {...props}
