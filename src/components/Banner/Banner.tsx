@@ -7,7 +7,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import {Link} from "react-router-dom";
 import styles from './Banner.module.css';
 
-const Banner = () => {
+const Banner: React.FC = () => {
     return (
         <div>
             <Swiper
