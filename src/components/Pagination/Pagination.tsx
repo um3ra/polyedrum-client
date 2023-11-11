@@ -1,13 +1,18 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
 import {getAllProducts} from "../../store/products/productsSlice";
 import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from 'react-icons/md'
 import styles from './Pagination.module.css';
+import {IPagination} from "../../@types/productType";
+import {useAppDispatch} from "../../store/store";
 
-const Pagination = ({pagination}) => {
-    const {pageNo, totalPages, pageSize, totalCount} = pagination;
-    const dispatch = useDispatch();
-    const changeCurrentPage = (pageNo) => {
+interface PaginationProps{
+    pagination: IPagination
+}
+
+const Pagination: React.FC<PaginationProps> = ({pagination}) => {
+    const {pageNo, totalPages} = pagination;
+    const dispatch = useAppDispatch();
+    const changeCurrentPage = (pageNo: number) => {
         dispatch(getAllProducts({pageNo}));
     }
 
@@ -26,7 +31,7 @@ const Pagination = ({pagination}) => {
             </div>
 
             <div className={styles.paginationItem}>
-                {pageNo<totalPages - 1&&
+                {totalPages&&pageNo<totalPages - 1&&
                     <div className={styles.arrowRight} onClick={() => changeCurrentPage(pageNo + 1)}>
                         <MdKeyboardArrowRight color={'#fff'} size={30}/>
                     </div>}

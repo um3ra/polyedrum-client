@@ -44,9 +44,9 @@ export interface IProductsState{
 export interface IAuthor extends IGenre{}
 
 export interface IGetAllProductsParams{
-    name: string
-    sortType: string
-    pageNo: number
+    name?: string
+    sortType?: string
+    pageNo?: number
 }
 
 export interface IProductsResponse extends IPagination{
