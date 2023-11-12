@@ -13,8 +13,8 @@ const cartAPI = rootAPI.injectEndpoints({
             providesTags: ['Cart']
         }),
 
-        addProductToCart: build.mutation({
-            query(id: number) {
+        addProductToCart: build.mutation<APIResponse<string>, number>({
+            query(id) {
                 return {
                     url: `bucket/add/${id}`,
                     method: 'PUT',
@@ -23,8 +23,8 @@ const cartAPI = rootAPI.injectEndpoints({
             invalidatesTags: ['Cart'],
         }),
 
-        deleteProductFromCart: build.mutation({
-            query(id: number) {
+        deleteProductFromCart: build.mutation<APIResponse<string>, number>({
+            query(id) {
                 return{
                     url: `bucket/delete/${id}`,
                     method: 'DELETE',
