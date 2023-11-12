@@ -2,10 +2,12 @@ import React from 'react';
 import styles from "./Profile.module.css";
 import { useOutletContext } from "react-router-dom";
 import {useGetUserOrdersQuery} from "../../store/order/orderAPI";
+import {IProfile} from "../../@types/userType";
 
-const MyAccount = () => {
-    const profileData = useOutletContext();
-    const {data: ordersData} = useGetUserOrdersQuery()
+const MyAccount: React.FC = () => {
+    const profileData = useOutletContext<IProfile>();
+    const {data: ordersData} = useGetUserOrdersQuery(null)
+
     return (
         <div className={styles.userProfileContent}>
             <div className={styles.userProfileContentTitle}>

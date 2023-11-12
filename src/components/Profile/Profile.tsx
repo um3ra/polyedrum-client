@@ -5,11 +5,10 @@ import {useGetUserProfileQuery} from "../../store/user/userApi";
 import Loader from "../common/Loader/Loader";
 import {useGetUserOrdersQuery} from "../../store/order/orderAPI";
 
+const Profile: React.FC = () => {
 
-const Profile = () => {
-
-    const {data: profileData} = useGetUserProfileQuery();
-    const {data: ordersData} = useGetUserOrdersQuery();
+    const {data: profileData} = useGetUserProfileQuery(null);
+    const {data: ordersData} = useGetUserOrdersQuery(null);
 
     if (!profileData){
         return <Loader/>

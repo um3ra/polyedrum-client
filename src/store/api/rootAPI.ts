@@ -1,10 +1,21 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {RootState} from "../store";
+import {BaseQueryFn} from "@reduxjs/toolkit/dist/query/baseQueryTypes";
+import {FetchArgs, FetchBaseQueryMeta} from "@reduxjs/toolkit/dist/query/fetchBaseQuery";
 
 export interface APIResponse<T>{
     data: T
     http: string
     message: string
+}
+
+interface ErrorResponse {
+    status: number
+    data: {
+        date: string
+        message: string
+        details: string
+    }
 }
 
 export const rootAPI = createApi({
@@ -20,6 +31,6 @@ export const rootAPI = createApi({
             }
             return headers;
         }
-    }),
+    }) as BaseQueryFn<string | FetchArgs, unknown, ErrorResponse, {}, FetchBaseQueryMeta>,
     endpoints: () => ({}),
 });

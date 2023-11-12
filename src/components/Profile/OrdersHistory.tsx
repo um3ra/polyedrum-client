@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './Profile.module.css';
 import {useGetUserOrdersQuery} from "../../store/order/orderAPI";
 
-const OrdersHistory = () => {
-    const {data: orderData} = useGetUserOrdersQuery();
+const OrdersHistory: React.FC = () => {
+    const {data: orderData} = useGetUserOrdersQuery(null);
 
     if (!orderData){
         return <div>Loading</div>

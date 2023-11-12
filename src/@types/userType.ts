@@ -7,8 +7,9 @@ enum EnumRole {
 export interface IUser {
     firstName?: string
     lastName?: string
-    email: string
-    password: string
+    email?: string
+    password?: string
+    matchingPassword?: string
 }
 
 export interface IProfile extends IUser{

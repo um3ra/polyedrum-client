@@ -1,19 +1,19 @@
 import React from 'react';
 import {Input, Button} from '../common'
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {useUpdateUserDataMutation} from "../../store/user/userApi";
 import styles from './Profile.module.css'
 import {useOutletContext} from "react-router-dom";
+import {IProfile, IUser} from "../../@types/userType";
 
-const PersonalDetails = () => {
-    const {register, formState: {errors}, handleSubmit} = useForm();
-    const profileData = useOutletContext();
+const PersonalDetails: React.FC = () => {
+    const {register, formState: {errors}, handleSubmit} = useForm<IUser>();
+    const profileData = useOutletContext<IProfile>();
     const [updateProfile, {error: profileError}] = useUpdateUserDataMutation();
 
-    const updateUserData = (formData) => {
-        updateProfile({id: profileData.id, ...formData});
+    const updateUserData: SubmitHandler<IUser> = (formData) => {
+        updateProfile({id: profileData.id, body: formData});
     }
-
 
     return (
         <div className={styles.userProfileContent}>
@@ -74,7 +74,7 @@ const PersonalDetails = () => {
                         ...register('matchingPassword')
                     }} error={errors?.password?.message} type="password"/>
                 </div>
-                {profileError?.data?.message&& <div>{profileError.data.message}</div>}
+                {profileError&&'data' in profileError&&<div>{profileError.data.message}</div>}
                 <Button>Update</Button>
             </form>
         </div>
