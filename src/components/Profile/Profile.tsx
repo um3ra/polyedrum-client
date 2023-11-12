@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, Outlet} from 'react-router-dom';
 import styles from './Profile.module.css';
-import {useGetUserProfileQuery} from "../../store/user/userApi";
+import {useGetUserProfileQuery} from "../../store/user/userAPI";
 import Loader from "../common/Loader/Loader";
 import {useGetUserOrdersQuery} from "../../store/order/orderAPI";
 

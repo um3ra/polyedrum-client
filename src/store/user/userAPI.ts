@@ -17,7 +17,7 @@ const userAPI = rootAPI.injectEndpoints({
             }),
 
         register:
-            build.mutation<APIResponse<string>, IUser>({
+            build.mutation<APIResponse<IAuthResponse>, IUser>({
                 query(body) {
                     return {
                         url: '/auth/register',

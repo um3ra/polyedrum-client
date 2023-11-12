@@ -1,24 +1,25 @@
 import React, {useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {useForm} from "react-hook-form";
-import {setAuthData, setMessage} from "../../../store/auth/authSlice";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {setAuthData} from "../../../store/auth/authSlice";
 import {Button, Input} from "../../common";
 import styles from "../Auth.module.css";
-import {useRegisterMutation} from "../../../store/user/userApi";
+import {useRegisterMutation} from "../../../store/user/userAPI";
 import {useDispatch} from "react-redux";
+import {IUser} from "../../../@types/userType";
 
-const RegisterForm = () => {
+const RegisterForm: React.FC = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {register, formState: {errors}, handleSubmit, reset} = useForm({mode: "onChange"});
+    const {register, formState: {errors}, handleSubmit, reset} = useForm<IUser>({mode: "onChange"});
     const [userRegister, {data: authData, error: authError}] = useRegisterMutation();
 
 
-    const onSubmit = (data) => {
+    const onSubmit: SubmitHandler<IUser> = (data) => {
         userRegister({
-            firstName: data.firstname,
-            lastName: data.lastname,
+            firstName: data.firstName,
+            lastName: data.lastName,
             email: data.email,
             password: data.password,
         });
@@ -29,9 +30,6 @@ const RegisterForm = () => {
             dispatch(setAuthData(authData.data.token));
             reset();
             navigate("/");
-        }
-        return () => {
-            dispatch(setMessage(null))
         }
     }, [authData, reset, navigate])
 
@@ -44,7 +42,7 @@ const RegisterForm = () => {
 
                 <div className={styles.loginFormItem}>
                     <Input register={{
-                        ...register('firstname',
+                        ...register('firstName',
                             {
                                 required: 'field is required!',
                                 maxLength: {
@@ -53,12 +51,12 @@ const RegisterForm = () => {
                                 }
                             },
                         )
-                    }} error={errors?.firstname?.message} placeholder={"firstname"}/>
+                    }} error={errors?.firstName?.message} placeholder={"firstname"}/>
                 </div>
 
                 <div className={styles.loginFormItem}>
                     <Input register={{
-                        ...register('lastname',
+                        ...register('lastName',
                             {
                                 required: 'field is required!',
                                 maxLength: {
@@ -67,7 +65,7 @@ const RegisterForm = () => {
                                 }
                             },
                         )
-                    }} error={errors?.lastname?.message} placeholder={"lastname"}/>
+                    }} error={errors?.lastName?.message} placeholder={"lastname"}/>
                 </div>
 
                 <div className={styles.loginFormItem}>
@@ -94,7 +92,7 @@ const RegisterForm = () => {
                     }} error={errors?.password?.message} type="password" placeholder={"password"}/>
                 </div>
 
-                {authError?.data?.message && <span className={'errorMessage'}>{authError.data.message}</span>}
+                {authError&&'data' in authError && <span className={'errorMessage'}>{authError.data.message}</span>}
 
                 <div className={styles.loginFormLinks}>
                     <Link to={"/login"}>A have an account</Link>
