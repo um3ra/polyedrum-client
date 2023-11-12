@@ -1,17 +1,18 @@
 import React, {useEffect} from 'react';
 import Banner from '../Banner/Banner';
 import ProductsCarousel from "../ProductCarousel/ProductsCarousel";
-import {useDispatch, useSelector} from "react-redux";
 import {getAllProducts} from "../../store/products/productsSlice";
 import {Loader} from "../common";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useAppDispatch} from "../../store/store";
 
 
-const Home = () => {
-    const {productList} = useSelector(state => state.products)
-    const dispatch = useDispatch();
+const Home: React.FC = () => {
+    const productList = useTypedSelector(state => state.products.productList);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getAllProducts(''))
+        dispatch(getAllProducts({}))
     }, [dispatch])
 
     if(!productList){
