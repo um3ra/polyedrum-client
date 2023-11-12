@@ -10,15 +10,15 @@ const categoryAPI = rootAPI.injectEndpoints({
             providesTags: ['Category'],
         }),
 
-        getCategoryByName: build.query<ICategory, string>({
+        getCategoryByName: build.query<APIResponse<ICategory>, string>({
             query(name) {
                 return `categories/${name}`
             },
             providesTags: ['Category'],
         }),
 
-        deleteCategoryByName: build.mutation({
-            query(name: string) {
+        deleteCategoryByName: build.mutation<APIResponse<string>, string>({
+            query(name) {
                 return {
                     url: `categories/${name}`,
                     method: 'DELETE'
@@ -27,8 +27,8 @@ const categoryAPI = rootAPI.injectEndpoints({
             invalidatesTags: ['Category'],
         }),
 
-        updateCategoryByName: build.mutation({
-            query({name, categoryData}: {name: string, categoryData: ICategory}) {
+        updateCategoryByName: build.mutation<APIResponse<string>, {name: string, categoryData: ICategory}>({
+            query({name, categoryData}) {
                 return {
                     url: `categories/${name}`,
                     method: 'PUT',
@@ -38,8 +38,8 @@ const categoryAPI = rootAPI.injectEndpoints({
             invalidatesTags: ['Category']
         }),
 
-        createCategory: build.mutation({
-            query(categoryData: ICategory) {
+        createCategory: build.mutation<APIResponse<string>, ICategory>({
+            query(categoryData) {
                 return {
                     url: 'categories',
                     method: 'POST',
@@ -50,8 +50,8 @@ const categoryAPI = rootAPI.injectEndpoints({
 
         }),
 
-        addGenreToCategory: build.mutation({
-            query({category, genre}: {category: string, genre: string}) {
+        addGenreToCategory: build.mutation<APIResponse<string>, {category: string, genre: string}>({
+            query({category, genre}) {
                 return {
                     url: `categories/${category}?genre=${genre}`,
                     method: 'POST',
@@ -60,8 +60,8 @@ const categoryAPI = rootAPI.injectEndpoints({
             invalidatesTags: ['Category']
         }),
 
-        deleteGenreFromCategory: build.mutation({
-            query({category, genre}: {category: string, genre: string}) {
+        deleteGenreFromCategory: build.mutation<APIResponse<string>, {category: string, genre: string}>({
+            query({category, genre}) {
                 return {
                     url: `categories/${category}/genre/${genre}`,
                     method: 'PUT'
