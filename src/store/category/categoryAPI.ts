@@ -27,16 +27,17 @@ const categoryAPI = rootAPI.injectEndpoints({
             invalidatesTags: ['Category'],
         }),
 
-        updateCategoryByName: build.mutation<APIResponse<string>, {name: string, categoryData: ICategory}>({
-            query({name, categoryData}) {
-                return {
-                    url: `categories/${name}`,
-                    method: 'PUT',
-                    body: categoryData,
-                }
-            },
-            invalidatesTags: ['Category']
-        }),
+        updateCategoryByName:
+            build.mutation<APIResponse<string>, { name: string, categoryData: ICategory }>({
+                query({name, categoryData}) {
+                    return {
+                        url: `categories/${name}`,
+                        method: 'PUT',
+                        body: categoryData,
+                    }
+                },
+                invalidatesTags: ['Category']
+            }),
 
         createCategory: build.mutation<APIResponse<string>, ICategory>({
             query(categoryData) {
@@ -50,25 +51,27 @@ const categoryAPI = rootAPI.injectEndpoints({
 
         }),
 
-        addGenreToCategory: build.mutation<APIResponse<string>, {category: string, genre: string}>({
-            query({category, genre}) {
-                return {
-                    url: `categories/${category}?genre=${genre}`,
-                    method: 'POST',
-                }
-            },
-            invalidatesTags: ['Category']
-        }),
+        addGenreToCategory:
+            build.mutation<APIResponse<string>, { category: string, genre: string }>({
+                query({category, genre}) {
+                    return {
+                        url: `categories/${category}?genre=${genre}`,
+                        method: 'POST',
+                    }
+                },
+                invalidatesTags: ['Category']
+            }),
 
-        deleteGenreFromCategory: build.mutation<APIResponse<string>, {category: string, genre: string}>({
-            query({category, genre}) {
-                return {
-                    url: `categories/${category}/genre/${genre}`,
-                    method: 'PUT'
-                }
-            },
-            invalidatesTags: ['Category'],
-        })
+        deleteGenreFromCategory:
+            build.mutation<APIResponse<string>, { category: string, genre: string }>({
+                query({category, genre}) {
+                    return {
+                        url: `categories/${category}/genre/${genre}`,
+                        method: 'PUT'
+                    }
+                },
+                invalidatesTags: ['Category'],
+            })
     })
 });
 
