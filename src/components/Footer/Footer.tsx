@@ -7,8 +7,8 @@ import {useGetCategoriesQuery} from "../../store/category/categoryAPI";
 import styles from './Footer.module.css';
 
 
-const Footer = () => {
-   const {data: categoryData} = useGetCategoriesQuery();
+const Footer: React.FC = () => {
+   const {data: categoryData} = useGetCategoriesQuery(null);
 
     return (
         <footer className={styles.footer}>

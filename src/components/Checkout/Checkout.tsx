@@ -7,8 +7,8 @@ import styles from './Checkout.module.css';
 import {useNavigate} from "react-router-dom";
 
 const Checkout = () => {
-    const {data: cartData} = useGetCartQuery();
-    const {data: userData} = useGetUserProfileQuery();
+    const {data: cartData} = useGetCartQuery(null);
+    const {data: userData} = useGetUserProfileQuery(null);
     const [checkout, {data: checkoutData, isSuccess}] = useCheckoutMutation();
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -32,14 +32,14 @@ const Checkout = () => {
 
     const handleCheckout = () => {
         setCheckoutStatus(true);
-        checkout();
+        checkout(null);
     }
 
     return (
         <div className={`fix-wrapper ${styles.checkout}`}>
             <div className={styles.checkoutUser}>
                 <div>
-                    <Modal onClick={() => alert("ok")} setActive={setShowModal} callback={modalClick} active={showModal}>
+                    <Modal callback={modalClick} active={showModal}>
                         {checkoutData?.message && <span className={'successMessage'}>{checkoutData?.message}</span>}
                     </Modal>
                     <div>
