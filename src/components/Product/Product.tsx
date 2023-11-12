@@ -4,9 +4,9 @@ import CART from '../../images/icon/cart.svg';
 import {Button} from "../common";
 import {useAddProductToCartMutation} from "../../store/cart/cartAPI";
 import styles from './Product.module.css';
+import {IProductsItem} from "../../@types/productType";
 
-
-const Product = ({id, title, price, img, author}) => {
+const Product: React.FC<IProductsItem> = ({id, title, price, img, author}) => {
     const [addProduct] = useAddProductToCartMutation();
     const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Product = ({id, title, price, img, author}) => {
                     </div>
                 </div>
                 <Button onClick={() => addProduct(id)} addClass={styles.collectionCardBtn}>
-                    <img src={CART}/><span>Add to Cart</span>
+                    <img src={CART} alt={'cart'}/><span>Add to Cart</span>
                 </Button>
             </div>
         </div>
