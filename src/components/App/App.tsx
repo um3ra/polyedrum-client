@@ -3,7 +3,7 @@ import Header from '../Header/Header'
 import AppRouter from "../AppRouter/AppRouter";
 import Footer from "../Footer/Footer";
 
-const App = () => (
+const App: React.FC = () => (
     <div className={`wrapper`}>
         <Header/>
         <main>

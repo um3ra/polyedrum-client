@@ -12,6 +12,12 @@ export interface IUser {
     matchingPassword?: string
 }
 
+export interface IAuthResponse{
+    message: string
+    token: string
+    mail: string
+}
+
 export interface IProfile extends IUser{
     id: number
     bucket: ICart

@@ -8,7 +8,7 @@ import store, {persistor} from "./store/store";
 import "./styles/index.css";
 
 
-createRoot(document.getElementById("root"))
+createRoot(document.getElementById("root") !)
     .render(
         <BrowserRouter>
             <Provider store={store}>

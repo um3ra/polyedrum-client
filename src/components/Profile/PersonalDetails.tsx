@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input, Button} from '../common'
 import {SubmitHandler, useForm} from "react-hook-form";
-import {useUpdateUserDataMutation} from "../../store/user/userApi";
+import {useUpdateUserDataMutation} from "../../store/user/userAPI";
 import styles from './Profile.module.css'
 import {useOutletContext} from "react-router-dom";
 import {IProfile, IUser} from "../../@types/userType";

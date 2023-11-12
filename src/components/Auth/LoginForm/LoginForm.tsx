@@ -1,19 +1,20 @@
 import React, {useEffect} from 'react';
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
-import {setMessage, setAuthData} from "../../../store/auth/authSlice";
+import {setAuthData} from "../../../store/auth/authSlice";
 import {Button, Input} from "../../common";
 import styles from '../Auth.module.css';
 import {useDispatch} from "react-redux";
-import {useLoginMutation} from "../../../store/user/userApi";
+import {useLoginMutation} from "../../../store/user/userAPI";
+import {IUser} from "../../../@types/userType";
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {register, formState: {errors}, handleSubmit, reset} = useForm({mode: "onChange"});
+    const {register, formState: {errors}, handleSubmit, reset} = useForm<IUser>({mode: "onChange"});
     const [login, {data: authData, error: authError}] = useLoginMutation();
-    const onSubmit = (data) => {
+    const onSubmit: SubmitHandler<IUser> = (data) => {
         login({email: data.email, password: data.password});
     }
 
@@ -22,9 +23,6 @@ const LoginForm = () => {
             dispatch(setAuthData(authData.data.token));
             reset();
             navigate("/");
-        }
-        return () => {
-            dispatch(setMessage(null))
         }
     }, [authData])
 

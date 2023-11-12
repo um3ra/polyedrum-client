@@ -1,12 +1,12 @@
 import {APIResponse, rootAPI} from "../api/rootAPI";
-import {IProfile, IUser} from "../../@types/userType";
+import {IAuthResponse, IProfile, IUser} from "../../@types/userType";
 
 
 const userAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
 
         login:
-            build.mutation<APIResponse<string>, IUser>({
+            build.mutation<APIResponse<IAuthResponse>, IUser>({
                 query(body) {
                     return {
                         url: '/auth/login',
