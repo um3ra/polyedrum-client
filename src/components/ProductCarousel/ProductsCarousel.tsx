@@ -6,8 +6,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import styles from './ProductsCarousel.module.css';
+import {IProductsItem} from "../../@types/productType";
 
-const ProductsCarousel = ({list, title}) => {
+interface ProductsCarouselProps {
+    list: Array<IProductsItem>
+    title: string
+}
+
+const ProductsCarousel: React.FC<ProductsCarouselProps> = ({list, title}) => {
     return (
         <div className={"fix-wrapper"}>
             <div className={styles.collectionBlockTitle}>
