@@ -74,7 +74,11 @@ const PersonalDetails: React.FC = () => {
                         ...register('matchingPassword')
                     }} error={errors?.password?.message} type="password"/>
                 </div>
-                {profileError&&'data' in profileError&&<div>{profileError.data.message}</div>}
+                {profileError&&'data' in profileError&&
+                    <div>
+                        <span className={'errorMessage'}>{profileError.data.message}</span>
+                    </div>
+                }
                 <Button>Update</Button>
             </form>
         </div>
