@@ -4,7 +4,21 @@ import {useDeleteProductFromCartMutation} from "../../../store/cart/cartAPI";
 import {useNavigate} from "react-router-dom";
 import styles from "../Cart.module.css";
 
-const CartContentItem = ({productTitle, quantity, imgURL, productId, sum}) => {
+interface CartContentItemProps {
+    productId: number
+    sum: number
+    quantity: number
+    productTitle: string
+    imgURL: string
+}
+
+const CartContentItem: React.FC<CartContentItemProps> = ({
+                                                             productTitle,
+                                                             quantity,
+                                                             imgURL,
+                                                             productId,
+                                                             sum}) => {
+
     const [deleteProduct, { isSuccess }] = useDeleteProductFromCartMutation();
     const [removeStatus, setRemoveStatus] = useState(false);
     const navigate = useNavigate();
@@ -15,7 +29,7 @@ const CartContentItem = ({productTitle, quantity, imgURL, productId, sum}) => {
         }
     }, [quantity])
 
-    const handleRemoveButton = (id) => {
+    const handleRemoveButton = (id: number) => {
         deleteProduct(id)
         setRemoveStatus(true);
     }

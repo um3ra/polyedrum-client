@@ -5,9 +5,9 @@ import {Button} from "../../common";
 import {useNavigate} from "react-router-dom";
 import {useGetCartQuery} from "../../../store/cart/cartAPI";
 
-const CartContent = () => {
+const CartContent: React.FC = () => {
     const navigate = useNavigate();
-    const {data: cartData} = useGetCartQuery();
+    const {data: cartData} = useGetCartQuery(null);
 
     return (
         <div className={styles.cartContent}>

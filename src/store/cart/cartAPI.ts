@@ -1,9 +1,9 @@
-import {rootAPI} from "../api/rootAPI";
+import {APIResponse, rootAPI} from "../api/rootAPI";
 import {ICart} from "../../@types/cartType";
 
 const cartAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getCart: build.query<ICart, null>({
+        getCart: build.query<APIResponse<ICart>, null>({
             query() {
                 return {
                     url: 'bucket',

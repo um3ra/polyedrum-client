@@ -2,15 +2,15 @@ import React from 'react';
 import styles from './Cart.module.css';
 import {useState} from "react";
 import CART from '../../images/icon/cart.svg';
-import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {CSSTransition} from "react-transition-group";
 import CartContent from "./CartContent/CartContent";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 
-const Cart = () => {
+const Cart: React.FC = () => {
     const [showCart, setShowCart] = useState(false);
-    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const isLoggedIn = useTypedSelector(state => state.auth.isLoggedIn);
     const navigate = useNavigate();
 
     const handleClick = () => {
