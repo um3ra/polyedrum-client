@@ -16,6 +16,19 @@ export interface IProductsItem{
     author: string
 }
 
+interface IProductAdditional{
+    description: string
+    numberOfPages: number
+    publisher: string
+    weight: number
+}
+
+export interface IProduct extends IProductsItem{
+    genres: IGenre[]
+    additional: IProductAdditional
+    imageURL: string
+}
+
 export interface IPagination {
     pageNo: number
     pageSize: number

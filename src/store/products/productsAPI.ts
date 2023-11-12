@@ -1,9 +1,9 @@
 import {APIResponse, rootAPI} from "../api/rootAPI";
-import {IAuthor, IProductsItem} from "../../@types/productType";
+import {IAuthor, IProduct, IProductsItem} from "../../@types/productType";
 
 const productsAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getProductByName: build.query<APIResponse<IProductsItem>, string>({
+        getProductByName: build.query<APIResponse<IProduct>, string>({
             query(name) {
                 return `/products/${name}`
             },

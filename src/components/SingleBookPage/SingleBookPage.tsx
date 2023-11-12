@@ -7,10 +7,10 @@ import {Button, Modal} from '../common';
 import Loader from "../common/Loader/Loader";
 import styles from './SingleBookPage.module.css';
 
-const SingleBookPage = () => {
+const SingleBookPage: React.FC = () => {
     const { productName } = useParams();
     const [currentBookDetail, setCurrentBookDetail] = useState("Description");
-    const {data: productData} = useGetProductByNameQuery(productName);
+    const {data: productData} = useGetProductByNameQuery(productName ?? '');
     const [addProduct, {data: addProductData, isSuccess}] = useAddProductToCartMutation();
     const [showModal, setShowModal] = useState(false);
     const [activeButton, setActiveButton] = useState(false);
@@ -27,7 +27,7 @@ const SingleBookPage = () => {
         return <Loader/>
     }
 
-    const handleClick = (id) => {
+    const handleClick = (id: number) => {
         addProduct(id);
         setActiveButton(true);
     }
@@ -62,11 +62,11 @@ const SingleBookPage = () => {
             </div>
             <ul className={styles.singleBookAdditional}>
                 <li className={currentBookDetail === 'Description' ? styles.singleBookAdditionalActive : ""}
-                    onClick={(e) => setCurrentBookDetail(e.target.innerText)}>
+                    onClick={(e) => setCurrentBookDetail((e.target as HTMLElement).innerText)}>
                     Description
                 </li>
                 <li className={currentBookDetail === 'Details' ? styles.singleBookAdditionalActive : ""}
-                    onClick={(e) => setCurrentBookDetail(e.target.innerText)}>
+                    onClick={(e) => setCurrentBookDetail((e.target as HTMLElement).innerText)}>
                     Details
                 </li>
             </ul>

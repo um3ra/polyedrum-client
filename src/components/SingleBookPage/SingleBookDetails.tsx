@@ -1,6 +1,11 @@
 import React from 'react';
+import {IProduct} from "../../@types/productType";
 
-const SingleBookDetails = ({productData}) => {
+interface SingleBookDetailsProps {
+    productData: IProduct
+}
+
+const SingleBookDetails: React.FC<SingleBookDetailsProps> = ({productData}) => {
     return (
         <div>
             <div><i>Title:</i> <span>{productData.title}</span></div>
