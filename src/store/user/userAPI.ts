@@ -1,59 +1,64 @@
-import {rootAPI} from "../api/rootAPI";
+import {APIResponse, rootAPI} from "../api/rootAPI";
 import {IProfile, IUser} from "../../@types/userType";
 
 
 const userAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
 
-        login: build.mutation({
-            query(body: IUser) {
-                return {
-                    url: '/auth/login',
-                    method: 'POST',
-                    body,
-                }
-            },
-        }),
+        login:
+            build.mutation<APIResponse<string>, IUser>({
+                query(body) {
+                    return {
+                        url: '/auth/login',
+                        method: 'POST',
+                        body,
+                    }
+                },
+            }),
 
-        register: build.mutation({
-            query(body: IUser) {
-                return {
-                    url: '/auth/register',
-                    method: 'POST',
-                    body,
+        register:
+            build.mutation<APIResponse<string>, IUser>({
+                query(body) {
+                    return {
+                        url: '/auth/register',
+                        method: 'POST',
+                        body,
+                    }
                 }
-            }
-        }),
+            }),
 
-        getUserProfile: build.query<IProfile, null>({
-            query() {
-                return {
-                    url: 'user/profile',
-                    method: 'GET',
-                }
-            },
+        getUserProfile:
+            build.query<APIResponse<IProfile>, null>({
+                query() {
+                    return {
+                        url: 'user/profile',
+                        method: 'GET',
+                    }
+                },
 
-            providesTags: ['User']
-        }),
+                providesTags: ['User']
+            }),
 
-        updateUserData: build.mutation({
-            query({id, body}: {id: number, body: IUser}) {
-                return {
-                    url: `user/${id}`,
-                    method: "PUT",
-                    body
+        updateUserData:
+            build.mutation<APIResponse<string>, { id: number, body: IUser }>({
+                query({id, body}) {
+                    return {
+                        url: `user/${id}`,
+                        method: "PUT",
+                        body
+                    }
+                },
+                invalidatesTags: ['User'],
+            }),
+        getUsers:
+            build.query<APIResponse<IUser[]>, null>({
+                query() {
+                    return {
+                        url: "/user",
+                        method: "GET",
+                    }
                 }
-            },
-            invalidatesTags: ['User'],
-        }),
-        getUsers: build.query<IUser[], null>({
-            query() {
-                return {
-                    url: "/user",
-                    method: "GET",
-                }
-            }
-        })
+            }),
     })
 })
 
