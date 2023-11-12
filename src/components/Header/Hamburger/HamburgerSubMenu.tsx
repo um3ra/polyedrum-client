@@ -1,8 +1,14 @@
 import React, {useState} from 'react';
 import styles from "./Hamburger.module.css";
 import {useNavigate} from "react-router-dom";
+import {IGenre} from "../../../@types/genreType";
 
-const HamburgerSubMenu = ({genresList, title}) => {
+interface HamburgerSubMenuProps {
+    genresList: IGenre[]
+    title: string
+}
+
+const HamburgerSubMenu: React.FC<HamburgerSubMenuProps> = ({genresList, title}) => {
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
     return (

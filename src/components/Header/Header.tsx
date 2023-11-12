@@ -5,20 +5,20 @@ import SEARCH from '../../images/icon/search.svg'
 import Cart from "../Cart/Cart";
 import LOGO from "../../images/icon/logo_b.svg"
 import {Button} from "../common";
-import {useDispatch, useSelector} from "react-redux";
-import {useLazyGetUserProfileQuery} from "../../store/user/userApi";
+import {useDispatch} from "react-redux";
+import {useLazyGetUserProfileQuery} from "../../store/user/userAPI";
 import {resetAuthData} from "../../store/auth/authSlice";
 import Nav from "../Nav/Nav";
 import {rootAPI} from "../../store/api/rootAPI";
 import {useMatchMedia} from "../../hooks/useMatchMedia";
 import Hamburger from "./Hamburger/Hamburger";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
-
-const Header = () => {
+const Header: React.FC = () => {
     const dispatch = useDispatch();
-    const token = useSelector(state => state.auth.token);
+    const token = useTypedSelector(state => state.auth.token);
     const [getProfile, {data: profileData}] = useLazyGetUserProfileQuery();
-    const {isMobile} = useMatchMedia();
+    const { isMobile } = useMatchMedia();
     const navigate = useNavigate();
 
     const logoutUser = () => {
@@ -29,7 +29,7 @@ const Header = () => {
 
     useEffect(() => {
         if (token){
-            getProfile();
+            getProfile(null);
         }
     }, [token])
 

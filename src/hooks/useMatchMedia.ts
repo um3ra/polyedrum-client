@@ -6,7 +6,7 @@ const queries = [
     '(min-width: 993px)'
 ]
 
-export const useMatchMedia = () => {
+export const useMatchMedia = (): { [key: string]: boolean } => {
 
     const mediaQueryLists = queries.map(query => matchMedia(query));
     const getValues = () => mediaQueryLists.map(mql => mql.matches);

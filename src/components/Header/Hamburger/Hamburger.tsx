@@ -8,10 +8,15 @@ import {CSSTransition} from "react-transition-group";
 import styles from './Hamburger.module.css';
 import CartContent from "../../Cart/CartContent/CartContent";
 
+interface HamburgerProps {
+    token: string | null
+    email?: string
+    logout: () => void
+}
 
-const Hamburger = ({token, email, logout}) => {
+const Hamburger: React.FC<HamburgerProps> = ({token, email, logout}) => {
     const [showMenu, setShowMenu] = useState(false);
-    const {data: categoryData} = useGetCategoriesQuery();
+    const {data: categoryData} = useGetCategoriesQuery(null);
     const [showCartContent, setShowCartContent] = useState(false);
     const navigate = useNavigate();
 

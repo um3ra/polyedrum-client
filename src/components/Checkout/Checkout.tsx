@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useGetCartQuery} from "../../store/cart/cartAPI";
-import {useGetUserProfileQuery} from "../../store/user/userApi";
+import {useGetUserProfileQuery} from "../../store/user/userAPI";
 import {useCheckoutMutation} from "../../store/order/orderAPI";
 import {Button, Loader, Modal} from "../common";
 import styles from './Checkout.module.css';
 import {useNavigate} from "react-router-dom";
 
-const Checkout = () => {
+const Checkout: React.FC = () => {
     const {data: cartData} = useGetCartQuery(null);
     const {data: userData} = useGetUserProfileQuery(null);
     const [checkout, {data: checkoutData, isSuccess}] = useCheckoutMutation();
