@@ -1,23 +1,23 @@
-import {rootAPI} from "../api/rootAPI";
+import {APIResponse, rootAPI} from "../api/rootAPI";
 import {IAuthor, IProductsItem} from "../../@types/productType";
 
 const productsAPI = rootAPI.injectEndpoints({
     endpoints: build => ({
-        getProductByName: build.query<IProductsItem, string>({
+        getProductByName: build.query<APIResponse<IProductsItem>, string>({
             query(name) {
                 return `/products/${name}`
             },
             providesTags: ['Product'],
         }),
 
-        getAllProductAuthors: build.query<IAuthor[], null>({
+        getAllProductAuthors: build.query<APIResponse<IAuthor[]>, null>({
             query() {
                 return '/products/author/all'
             }
         }),
 
-        createProduct: build.mutation({
-            query(body: IProductsItem) {
+        createProduct: build.mutation<APIResponse<string>, IProductsItem>({
+            query(body) {
                 return {
                     url: '/products/create',
                     method: 'POST',
@@ -26,23 +26,24 @@ const productsAPI = rootAPI.injectEndpoints({
             },
         }),
 
-        uploadProductImage: build.mutation({
-            query({img, product}: {img: string, product: string}) {
-                const formData = new FormData();
-                formData.append('image', img);
-                formData.append('product', product);
-                return {
-                    url: `/products`,
-                    method: 'POST',
-                    formData: true,
-                    body: formData
-                }
-            },
-            invalidatesTags: ['Product'],
-        }),
+        uploadProductImage:
+            build.mutation<APIResponse<string>, { img: string, product: string }>({
+                query({img, product}) {
+                    const formData = new FormData();
+                    formData.append('image', img);
+                    formData.append('product', product);
+                    return {
+                        url: `/products`,
+                        method: 'POST',
+                        formData: true,
+                        body: formData
+                    }
+                },
+                invalidatesTags: ['Product'],
+            }),
 
-        deleteProduct: build.mutation({
-            query(id: number) {
+        deleteProduct: build.mutation<APIResponse<string>, number>({
+            query(id) {
                 return {
                     url: `/products/${id}`,
                     method: 'DELETE',
@@ -50,35 +51,38 @@ const productsAPI = rootAPI.injectEndpoints({
             }
         }),
 
-        updateProduct: build.mutation({
-            query({id, productData}: {id: number, productData: IProductsItem}) {
-                return {
-                    url: `products/update/${id}`,
-                    method: 'PUT',
-                    body: productData,
+        updateProduct:
+            build.mutation<APIResponse<string>, { id: number, productData: IProductsItem }>({
+                query({id, productData}) {
+                    return {
+                        url: `products/update/${id}`,
+                        method: 'PUT',
+                        body: productData,
+                    }
                 }
-            }
-        }),
+            }),
 
-        addProductToGenre: build.mutation({
-            query({name, genre}: {name: string, genre: string}) {
-                return {
-                    url: `products/${name}?genre=${genre}`,
-                    method: 'POST',
-                }
-            },
-            invalidatesTags: ['Product'],
-        }),
+        addProductToGenre:
+            build.mutation<APIResponse<string>, { name: string, genre: string }>({
+                query({name, genre}) {
+                    return {
+                        url: `products/${name}?genre=${genre}`,
+                        method: 'POST',
+                    }
+                },
+                invalidatesTags: ['Product'],
+            }),
 
-        deleteGenreFromProduct: build.mutation({
-            query({product, genre}: {product: string, genre: string}) {
-                return {
-                    url: `products/${product}/genre/${genre}`,
-                    method: 'PUT',
-                }
-            },
-            invalidatesTags: ['Product'],
-        })
+        deleteGenreFromProduct:
+            build.mutation<APIResponse<string>, { product: string, genre: string }>({
+                query({product, genre}) {
+                    return {
+                        url: `products/${product}/genre/${genre}`,
+                        method: 'PUT',
+                    }
+                },
+                invalidatesTags: ['Product'],
+            }),
     }),
     overrideExisting: false
 })
