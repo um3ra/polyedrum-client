@@ -28,7 +28,7 @@ const Product: React.FC<IProductsItem> = ({id, title, price, img, author}) => {
                         {price} $
                     </div>
                 </div>
-                <Button onClick={() => addProduct(id)} addClass={styles.collectionCardBtn}>
+                <Button onClick={() => id&&addProduct(id)} addClass={styles.collectionCardBtn}>
                     <img src={CART} alt={'cart'}/><span>Add to Cart</span>
                 </Button>
             </div>

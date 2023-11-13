@@ -1,18 +1,19 @@
 import React, {useEffect} from 'react';
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {Input, Loader, Textarea} from "../../common";
 import styles from "../AdminPage.module.css"
 import {useCreateProductMutation, useUploadProductImageMutation} from "../../../store/products/productsAPI";
 import {useNavigate} from "react-router-dom";
 import AdminForm from "../AdminForm";
+import {IProductFormFields} from "../../../@types/productType";
 
-const CreateProduct = () => {
-    const {register, formState: {errors}, handleSubmit} = useForm({mode: "onChange"});
+const CreateProduct: React.FC = () => {
+    const {register, formState: {errors}, handleSubmit} = useForm<IProductFormFields>({mode: "onChange"});
     const [createProduct, {error, isSuccess, isLoading}] = useCreateProductMutation();
     const [uploadImage] = useUploadProductImageMutation();
     const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
+    const onSubmit: SubmitHandler<IProductFormFields> = async (data) => {
         const additionalProductData = {
             description: data.description,
             numberOfPages: data.numberOfPages,
@@ -25,6 +26,7 @@ const CreateProduct = () => {
             author: data.author,
             additional: additionalProductData,
         }
+
         await createProduct(productData);
         if (data.productImage.length){
             uploadImage({img: data.productImage[0], product: data.title})
@@ -48,7 +50,9 @@ const CreateProduct = () => {
             <AdminForm
                 title={'Create Book'}
                 btnTitle={'Create'}
-                error={error?.data?.message}
+                error={
+                    error&&'data' in error?error.data.message : ''
+                }
                 submit={handleSubmit(onSubmit)}
             >
                 <div className={styles.adminContentFormBlock}>

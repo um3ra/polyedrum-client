@@ -2,7 +2,15 @@ import React from 'react';
 import styles from './AdminPage.module.css';
 import {Button} from "../common";
 
-const AdminForm = ({title, children, btnTitle, error, submit}) => (
+interface AdminFormProps {
+    title?: string
+    children?: React.ReactNode
+    btnTitle?: string
+    error?: string
+    submit: () => void
+}
+
+const AdminForm: React.FC<AdminFormProps> = ({title, children, btnTitle, error, submit}) => (
     <div className={`${styles.adminContent} ${styles.adminContentForm}`}>
         <form onSubmit={submit}>
             <h1>

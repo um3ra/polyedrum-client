@@ -9,7 +9,7 @@ export interface APIResponse<T>{
     message: string
 }
 
-interface ErrorResponse {
+export interface ErrorResponse {
     status: number
     data: {
         date: string

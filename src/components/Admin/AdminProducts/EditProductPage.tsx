@@ -8,19 +8,19 @@ import {
 } from "../../../store/products/productsAPI";
 import {Input, Textarea, EditList} from "../../common";
 import {useNavigate, useParams} from "react-router-dom";
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import styles from "../AdminPage.module.css";
 import AdminForm from "../AdminForm";
+import {IProductFormFields} from "../../../@types/productType";
 
-const EditProductPage = () => {
-
-    const {productName} = useParams();
-    const {data: productData} = useGetProductByNameQuery(productName);
+const EditProductPage: React.FC = () => {
+    const { productName } = useParams();
+    const {data: productData} = useGetProductByNameQuery(productName ?? '');
     const [updateProduct, {error: updateProductError, isSuccess}] = useUpdateProductMutation();
     const [uploadProductImage] = useUploadProductImageMutation();
     const [addProductToGenre, {data: productGenreData, error}] = useAddProductToGenreMutation();
     const [deleteGenre] = useDeleteGenreFromProductMutation();
-    const {register, handleSubmit, getValues, formState: {errors}} = useForm({mode: "onChange"});
+    const {register, handleSubmit, getValues, formState: {errors}} = useForm<{genre: string} & IProductFormFields>({mode: "onChange"});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,12 +29,15 @@ const EditProductPage = () => {
         }
     }, [isSuccess])
 
-    const deleteGenreCallback = (genre) => {
+    if (!productData){
+        return <div>Loading</div>
+    }
+
+    const deleteGenreCallback = (genre: string) => {
         deleteGenre({product: productData.data.title, genre});
     }
 
-
-    const onSubmit = async (data) => {
+    const onSubmit: SubmitHandler<IProductFormFields> = async (data) => {
         const additionalProductData = {
             description: data.description,
             numberOfPages: data.numberOfPages,
@@ -47,14 +50,12 @@ const EditProductPage = () => {
             author: data.author,
             additional: additionalProductData,
         }
-        await updateProduct({id: productData.data.id, productData: product})
+        await updateProduct({id: productData.data.id!, productData: product})
         if (data.productImage.length){
             uploadProductImage({img: data.productImage[0], product: data.title});
         }
     }
-    if (!productData){
-        return <div>Loading</div>
-    }
+
     const addNewGenre = () => {
         const newGenre = getValues("genre");
         addProductToGenre({name: productData.data.title, genre: newGenre})
@@ -63,7 +64,11 @@ const EditProductPage = () => {
         <AdminForm
             title={'Edit Product'}
             btnTitle={'Update'}
-            error={updateProductError?.data?.message}
+            error={
+                updateProductError &&
+                'data' in updateProductError ?
+                updateProductError.data.message : ''
+            }
             submit={handleSubmit(onSubmit)}
         >
             <div className={styles.adminContentFormBlock}>
@@ -85,7 +90,7 @@ const EditProductPage = () => {
             <div className={styles.adminContentFormBlock}>
                 <EditList
                     messages={{
-                        error: error?.data?.message,
+                        error: error&&'data' in error?error.data.message : '',
                         success: productGenreData?.message
                     }}
                     list={productData?.data?.genres}

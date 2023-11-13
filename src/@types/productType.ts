@@ -9,14 +9,14 @@ export enum EnumSort {
 }
 
 export interface IProductsItem{
-    id: number
+    id?: number
     title: string
     price: number
-    img: string
+    img?: string
     author: string
 }
 
-interface IProductAdditional{
+export interface IProductAdditional{
     description: string
     numberOfPages: number
     publisher: string
@@ -24,9 +24,9 @@ interface IProductAdditional{
 }
 
 export interface IProduct extends IProductsItem{
-    genres: IGenre[]
+    genres?: IGenre[]
     additional: IProductAdditional
-    imageURL: string
+    imageURL?: string
 }
 
 export interface IPagination {
@@ -60,6 +60,14 @@ export interface IGetAllProductsParams{
     name?: string
     sortType?: string
     pageNo?: number
+}
+
+export interface IProductFormFields extends IProduct{
+    description: string
+    numberOfPages: number
+    weight: number
+    publisher: string
+    productImage: string
 }
 
 export interface IProductsResponse extends IPagination{

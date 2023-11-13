@@ -16,7 +16,7 @@ const productsAPI = rootAPI.injectEndpoints({
             }
         }),
 
-        createProduct: build.mutation<APIResponse<string>, IProductsItem>({
+        createProduct: build.mutation<APIResponse<string>, IProduct>({
             query(body) {
                 return {
                     url: '/products/create',

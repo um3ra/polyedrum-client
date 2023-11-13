@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
 import {getAllProducts} from "../../../store/products/productsSlice";
 import styles from "../AdminPage.module.css";
 import {Button} from "../../common";
@@ -8,16 +7,18 @@ import {useNavigate} from "react-router-dom";
 import button from "../../common/Button/Button";
 import {useDeleteProductMutation} from "../../../store/products/productsAPI";
 import Pagination from "../../Pagination/Pagination";
+import {useAppDispatch} from "../../../store/store";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
-const AdminPageProducts = () => {
-    const dispatch = useDispatch();
-    const products = useSelector(state => state.products.productList);
-    const pagination = useSelector(state => state.products.filter.pagination);
+const AdminPageProducts: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const products = useTypedSelector(state => state.products.productList);
+    const pagination = useTypedSelector(state => state.products.filter.pagination);
     const [deleteProduct, {data: deleteProductData}] = useDeleteProductMutation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getAllProducts(''))
+        dispatch(getAllProducts({}))
     }, [dispatch, deleteProductData])
 
     if (!products) {
@@ -69,7 +70,7 @@ const AdminPageProducts = () => {
                         return <div key={product.id}>
                             <button className={styles.adminContentBtnsEdit}
                                     onClick={() => navigate(`update-product/${product.title}`)}><AiOutlineEdit/></button>
-                            <button className={styles.adminContentBtnsDelete} onClick={() => deleteProduct(product.id)}>
+                            <button className={styles.adminContentBtnsDelete} onClick={() => product.id&&deleteProduct(product.id)}>
                                 <AiOutlineDelete/></button>
                         </div>
                     })}

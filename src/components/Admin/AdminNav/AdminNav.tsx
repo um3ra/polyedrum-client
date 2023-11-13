@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import AdminNavItem from './AdminNavItem';
 import styles from '../AdminPage.module.css';
 
-const AdminNav = () => {
+const AdminNav: React.FC = () => {
     const location = useLocation();
     const currentLocation = location.pathname.split("/")[2];
     const [currentNavSelection, setCurrentNavSelection] = useState(currentLocation);

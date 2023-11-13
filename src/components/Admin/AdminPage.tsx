@@ -3,7 +3,7 @@ import AdminNav from "./AdminNav/AdminNav";
 import {Outlet} from "react-router-dom";
 import styles from './AdminPage.module.css';
 
-const AdminPage = () => (
+const AdminPage: React.FC = () => (
     <div className={`fix-wrapper ${styles.adminBlock}`}>
         <AdminNav/>
         <Outlet/>

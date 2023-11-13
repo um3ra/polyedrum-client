@@ -1,17 +1,16 @@
 import React from 'react';
 import {AiOutlineDelete} from "react-icons/ai";
-import {Button, Input} from "../../common";
+import {Input} from "../../common";
 import styles from "./EditList.module.css";
 import {IGenre} from "../../../@types/genreType";
 
-interface IMessages {
-    success: string
-    error: string
-}
 
 interface EditListProps{
-    messages: IMessages
-    list: IGenre[]
+    messages: {
+        success?: string
+        error?: string
+    }
+    list?: IGenre[]
     deleteCallback: (name: string) => void
     addCallback: () => void
     title?: string
@@ -34,8 +33,7 @@ const EditList: React.FC<EditListProps> = ({
             <h3>
                 {title}
             </h3>
-
-            {list.length ?
+            {list?.length ?
                 <ul className={styles.editList}>
                     {list.map((item) => {
                         return (
@@ -61,10 +59,6 @@ const EditList: React.FC<EditListProps> = ({
                 ...registerBtn
             }} placeholder={"add new"}/>
             <Input onClick={addCallback} type={"button"} value={`add new ${title}`}/>
-
-            <Button disabled={true}>
-
-            </Button>
         </div>
     );
 };
