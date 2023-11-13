@@ -2,8 +2,8 @@ import React from 'react';
 import {useGetUsersQuery} from "../../../store/user/userAPI";
 import styles from "../AdminPage.module.css";
 
-const AdminUsersPage = () => {
-    const {data: userData} = useGetUsersQuery();
+const AdminUsersPage: React.FC = () => {
+    const {data: userData} = useGetUsersQuery(null);
 
     if (!userData){
         return <div>Loading</div>
