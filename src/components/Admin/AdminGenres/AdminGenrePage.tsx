@@ -6,9 +6,9 @@ import {useDeleteGenreByNameMutation, useGetGenresQuery} from "../../../store/ge
 import button from "../../common/Button/Button";
 import {AiOutlineDelete, AiOutlineEdit} from "react-icons/ai";
 
-const AdminGenrePage = () => {
+const AdminGenrePage: React.FC = () => {
     const navigate = useNavigate();
-    const {data: genreData} = useGetGenresQuery();
+    const {data: genreData} = useGetGenresQuery(null);
     const [deleteGenre] = useDeleteGenreByNameMutation();
 
     return (

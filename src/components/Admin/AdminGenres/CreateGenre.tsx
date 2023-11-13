@@ -1,33 +1,40 @@
 import React, {useEffect} from 'react';
 import styles from "../AdminPage.module.css";
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {Input, Loader} from "../../common";
 import {useCreateGenreMutation} from "../../../store/genre/genreAPI";
 import {useNavigate} from "react-router-dom";
 import AdminForm from "../AdminForm";
+import {IGenre} from "../../../@types/genreType";
 
-const CreateGenre = () => {
-    const {register, handleSubmit} = useForm({mode: "onChange"});
+const CreateGenre: React.FC = () => {
+    const {register, handleSubmit} = useForm<IGenre>({mode: "onChange"});
     const [createGenre, {error: genreError, isSuccess, isLoading}] = useCreateGenreMutation();
     const navigate = useNavigate();
-    const onSubmit = (data) => {
-        createGenre(data);
-    }
+
     useEffect(() => {
         if (isSuccess)
             navigate("/admin-panel/genres");
     }, [isSuccess])
+
+    const onSubmit: SubmitHandler<IGenre> = (data) => {
+        createGenre(data);
+    }
 
     if (isLoading){
         return <div className={`${styles.adminContent} ${styles.adminContentForm}`}>
             <Loader/>
         </div>
     }
+
     return (
         <AdminForm
             title={'Create Genre'}
             btnTitle={'Create'}
-            error={genreError?.data?.message}
+            error={
+                genreError && 'data' in genreError ?
+                    genreError.data.message : ''
+            }
             submit={handleSubmit(onSubmit)}
         >
             <div className={styles.adminContentFormBlock}>
