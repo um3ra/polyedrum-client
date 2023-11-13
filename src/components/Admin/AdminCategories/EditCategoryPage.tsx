@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {EditList, Input} from "../../common";
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {
     useDeleteGenreFromCategoryMutation,
     useGetCategoryByNameQuery,
@@ -10,33 +10,17 @@ import {
 import {useNavigate, useParams} from "react-router-dom";
 import AdminForm from "../AdminForm";
 import styles from "../AdminPage.module.css";
+import {ICategory} from "../../../@types/categoryType";
 
-const EditCategoryPage = () => {
+const EditCategoryPage: React.FC = () => {
 
-    const {register, getValues, handleSubmit} = useForm();
+    const {register, getValues, handleSubmit} = useForm<ICategory & {genre: string}>();
     const {categoryName} = useParams();
-    const {data: categoryData} = useGetCategoryByNameQuery(categoryName);
+    const {data: categoryData} = useGetCategoryByNameQuery(categoryName ?? '');
     const [deleteGenre] = useDeleteGenreFromCategoryMutation();
     const [addGenre, {data: addGenreData, error: addGenreError}] = useAddGenreToCategoryMutation();
     const [updateCategory, {error: updateGenreError, isSuccess}] = useUpdateCategoryByNameMutation();
     const navigate = useNavigate();
-
-    const addNewGenre = () => {
-        console.log(getValues("genre"))
-        const newGenre = getValues("genre");
-        addGenre({category: categoryData.data.name, genre: newGenre})
-    }
-
-    const deleteGenreCallback = (genre) => {
-        deleteGenre({category: categoryData.data.name, genre})
-    }
-
-    const onSubmit = (data) => {
-        updateCategory({
-            name: categoryData.data.name,
-            categoryData: data,
-        })
-    }
 
     useEffect(() => {
         if (isSuccess){
@@ -48,11 +32,30 @@ const EditCategoryPage = () => {
         return <div>Loading...</div>
     }
 
+    const addNewGenre = () => {
+        const newGenre = getValues("genre");
+        addGenre({category: categoryData.data.name, genre: newGenre})
+    }
+
+    const deleteGenreCallback = (genre: string) => {
+        deleteGenre({category: categoryData.data.name, genre})
+    }
+
+    const onSubmit: SubmitHandler<ICategory> = (data) => {
+        updateCategory({
+            name: categoryData.data.name,
+            categoryData: data,
+        })
+    }
+
     return (
         <AdminForm
             title={'Edit Category'}
             btnTitle={'Update'}
-            error={updateGenreError?.message}
+            error={
+                updateGenreError && 'data' in updateGenreError ?
+                    updateGenreError.data.message : ''
+            }
             submit={handleSubmit(onSubmit)}
         >
             <div className={styles.adminContentFormBlock}>
@@ -72,10 +75,9 @@ const EditCategoryPage = () => {
                     registerBtn={{...register("genre")}}
                     messages={{
                         success: addGenreData?.message,
-                        error: addGenreError?.data?.message
+                        error: addGenreError&& 'data' in addGenreError ? addGenreError.data.message : ''
                     }}
-                >
-                </EditList>
+                />
             </div>
         </AdminForm>
     );

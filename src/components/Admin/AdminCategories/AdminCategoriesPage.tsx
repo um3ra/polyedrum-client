@@ -1,13 +1,12 @@
 import React from 'react';
 import {useDeleteCategoryByNameMutation, useGetCategoriesQuery} from "../../../store/category/categoryAPI";
-import button from "../../common/Button/Button";
 import {AiOutlineDelete, AiOutlineEdit} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
 import {Button} from "../../common";
 import styles from '../AdminPage.module.css';
 
-const AdminCategoriesPage = () => {
-    const {data: categoryData} = useGetCategoriesQuery();
+const AdminCategoriesPage: React.FC = () => {
+    const {data: categoryData} = useGetCategoriesQuery(null);
     const [deleteCategory] = useDeleteCategoryByNameMutation();
     const navigate = useNavigate();
     if(!categoryData){
