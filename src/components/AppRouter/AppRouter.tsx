@@ -22,7 +22,7 @@ import CreateGenre from "../Admin/AdminGenres/CreateGenre";
 import EditGenrePage from "../Admin/AdminGenres/EditGenrePage";
 import Checkout from "../Checkout/Checkout";
 
-const AppRouter = () => {
+const AppRouter: React.FC = () => {
     return (
         <Routes>
             <Route index element={<Home/>}/>

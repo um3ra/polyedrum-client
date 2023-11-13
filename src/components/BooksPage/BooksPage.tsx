@@ -6,21 +6,22 @@ import {
     getAllProducts,
     toggleCurrentSelection,
 } from "../../store/products/productsSlice";
-import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
 import {Loader} from "../common";
 import {useGetCategoriesQuery} from "../../store/category/categoryAPI";
 import {useGetAllProductAuthorsQuery} from "../../store/products/productsAPI";
 import styles from './BooksPage.module.css'
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useAppDispatch} from "../../store/store";
 
 
-const BooksPage = () => {
-    const products = useSelector( state => state.products.productList);
-    const loading = useSelector(state => state.products.loading);
-    const {data: categoryData} = useGetCategoriesQuery();
-    const {data: authorData} = useGetAllProductAuthorsQuery();
-    const pagination = useSelector(state => state.products.filter.pagination);
-    const dispatch = useDispatch();
+const BooksPage: React.FC = () => {
+    const products = useTypedSelector( state => state.products.productList);
+    const loading = useTypedSelector(state => state.products.loading);
+    const pagination = useTypedSelector(state => state.products.filter.pagination);
+    const {data: categoryData} = useGetCategoriesQuery(null);
+    const {data: authorData} = useGetAllProductAuthorsQuery(null);
+    const dispatch = useAppDispatch();
     const locate = useLocation();
 
 
@@ -29,7 +30,7 @@ const BooksPage = () => {
             const sortName = locate.pathname.split('/');
             dispatch(getAllProducts({sortType: sortName[2], name: sortName[3]}));
         }else {
-            dispatch(getAllProducts(''));
+            dispatch(getAllProducts({}));
         }
         return () => {
             const sortData = {selectionName: null, selectionType: null}
@@ -43,7 +44,7 @@ const BooksPage = () => {
 
     return (
         <div className={`${styles.flexContainer} fix-wrapper`}>
-            <Facet authorData={authorData} categoryData={categoryData} getAllProducts={getAllProducts}/>
+            <Facet authorData={authorData.data} categoryData={categoryData.data}/>
             {loading ?
                 <Loader/>
                 :

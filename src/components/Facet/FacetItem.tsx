@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
 import styles from "./Facet.module.css";
 import CheckBox from "../common/CheckBox/CheckBox";
-import {useSelector} from "react-redux";
 import {MdKeyboardArrowDown} from "react-icons/md"
 import {useNavigate} from "react-router-dom";
 import {CSSTransition} from "react-transition-group";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {IGenre} from "../../@types/genreType";
+import {IAuthor} from "../../@types/productType";
 
+interface FacetItemProps {
+    title: string
+    sortType: string
+    list: IGenre[] | IAuthor[]
+}
 
-const FacetItem = ({title, list, sortType}) => {
-    const currentSelection = useSelector(state => state.products.filter.currentSelection);
+const FacetItem: React.FC<FacetItemProps> = ({title, list, sortType}) => {
+    const currentSelection = useTypedSelector(state => state.products.filter.currentSelection);
     const [visibleList, setVisibleList] = useState(false);
     const navigate = useNavigate();
 
@@ -35,8 +42,7 @@ const FacetItem = ({title, list, sortType}) => {
                                 return (
                                     <li onClick={() => navigate(`${sortType}/${list.name}`)} key={list.id}>
                                         <CheckBox checked={currentSelection.selectionName === list.name}
-                                                  title={list.name}
-                                                  id={list.id}/>
+                                                  title={list.name}/>
                                     </li>
                                 )
                             })}
