@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useGetProductByNameQuery} from "../../store/products/productsAPI";
-import {useAddProductToCartMutation} from "../../store/cart/cartAPI";
-import {Link, useParams} from "react-router-dom";
+import {useAddProductToCartMutation, useGetCartQuery} from "../../store/cart/cartAPI";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import SingleBookDetails from "./SingleBookDetails";
 import {Button, Modal} from '../common';
 import Loader from "../common/Loader/Loader";
@@ -14,7 +14,8 @@ const SingleBookPage: React.FC = () => {
     const [addProduct, {data: addProductData, isSuccess}] = useAddProductToCartMutation();
     const [showModal, setShowModal] = useState(false);
     const [activeButton, setActiveButton] = useState(false);
-
+    const navigate = useNavigate();
+    const {data: cartData} = useGetCartQuery(null);
 
     useEffect(() => {
         if (isSuccess){
@@ -28,6 +29,9 @@ const SingleBookPage: React.FC = () => {
     }
 
     const handleClick = (id: number) => {
+        if(!cartData){
+            navigate('/login');
+        }
         addProduct(id);
         setActiveButton(true);
     }
