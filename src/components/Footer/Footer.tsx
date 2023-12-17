@@ -55,8 +55,8 @@ const Footer: React.FC = () => {
                     <ul className={styles.socialMedia}>
                         <li><a className={styles.socialMediaLink} href="https://www.facebook.com/"><BsFacebook/></a></li>
                         <li><a className={styles.socialMediaLink} href="https://www.instagram.com/"><BsInstagram/></a></li>
-                        <li><a className={styles.socialMediaLink} href=""><BsTwitter/></a></li>
-                        <li><a className={styles.socialMediaLink} href=""><BsTelegram/></a></li>
+                        <li><a className={styles.socialMediaLink} href="https://twitter.com/"><BsTwitter/></a></li>
+                        <li><a className={styles.socialMediaLink} href="https://telegram.org/"><BsTelegram/></a></li>
                     </ul>
                 </div>
             </div>

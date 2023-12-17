@@ -39,7 +39,6 @@ const CartContent: React.FC = () => {
                 <div className={styles.cartInfo}>Total: {cartData?.data?.amountProducts}</div>
                 <div className={styles.cartInfo}>Sum: {cartData?.data?.sum} $</div>
                 <div className={styles.cartBlock}>
-                    <Button>View Cart</Button>
                     <Button onClick={() => navigate("/checkout")}>Checkout</Button>
                 </div>
             </div>

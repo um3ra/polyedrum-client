@@ -30,13 +30,12 @@
 
 .cartList{
     overflow-y: auto;
-    /*height: 500px;*/
     height: 25em;
 }
 
 .cartBlock{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .cartBlockIcon{
@@ -46,7 +45,7 @@
 }
 
 .cartBlock button{
-    width: 45%;
+    width: 90%;
     font-size: 1.5em;
     font-weight: 700;
     border: 0;
