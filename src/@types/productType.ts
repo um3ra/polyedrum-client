@@ -46,6 +46,7 @@ interface IProductsFilter{
     order: EnumOrder
     sort: EnumSort
     pagination: IPagination
+    destination: string
 }
 
 export interface IProductsState{

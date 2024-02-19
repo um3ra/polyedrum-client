@@ -1,64 +1,79 @@
-import React, {useEffect} from 'react';
-import {SubmitHandler, useForm} from "react-hook-form";
-import {Link, useNavigate} from "react-router-dom";
-import {setAuthData} from "../../../store/auth/authSlice";
-import {Button, Input} from "../../common";
-import styles from '../Auth.module.css';
-import {useDispatch} from "react-redux";
-import {useLoginMutation} from "../../../store/user/userAPI";
-import {IUser} from "../../../@types/userType";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { setAuthData } from "../../../store/auth/authSlice";
+import { Button, Input } from "../../common";
+import styles from "../Auth.module.css";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "../../../store/user/userAPI";
+import { IUser } from "../../../@types/userType";
 
-const LoginForm: React.FC = () => {
-
+const LoginForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {register, formState: {errors}, handleSubmit, reset} = useForm<IUser>({mode: "onChange"});
-    const [login, {data: authData, error: authError}] = useLoginMutation();
-    const onSubmit: SubmitHandler<IUser> = (data) => {
-        login({email: data.email, password: data.password});
-    }
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+        reset,
+    } = useForm<IUser>({ mode: "onChange" });
+    const [login, { data: authData, error: authError }] = useLoginMutation();
+    const onSubmit: SubmitHandler<IUser> = data => {
+        login({ email: data.email, password: data.password });
+    };
 
     useEffect(() => {
-        if (authData?.data?.token){
+        if (authData?.data?.token) {
             dispatch(setAuthData(authData.data.token));
             reset();
             navigate("/");
         }
-    }, [authData])
-
+    }, [authData]);
 
     return (
         <div className={`fix-wrapper`}>
-            <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
-                <div className={styles.loginFormTitle}>
-                    Login
-                </div>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className={styles.loginForm}
+            >
+                <div className={styles.loginFormTitle}>Login</div>
                 <div className={styles.loginFormItem}>
-                    <Input register={{
-                        ...register('email',
-                            {
-                                required: 'field is required!',
+                    <Input
+                        register={{
+                            ...register("email", {
+                                required: "field is required!",
                                 pattern: {
                                     value: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-                                    message: 'Email is invalid!'
-                                }
-                            },
-                        )
-                    }} error={errors?.email?.message} placeholder={"email"}/>
+                                    message: "Email is invalid!",
+                                },
+                            }),
+                        }}
+                        error={errors?.email?.message}
+                        type="email"
+                        placeholder={"email"}
+                    />
                 </div>
                 <div className={styles.loginFormItem}>
-                    <Input register={{
-                        ...register('password', {
-                            required: "field is required!",
-                        })
-                    }} error={errors?.password?.message} type="password" placeholder={"password"}/>
+                    <Input
+                        register={{
+                            ...register("password", {
+                                required: "field is required!",
+                            }),
+                        }}
+                        error={errors?.password?.message}
+                        type="password"
+                        placeholder={"password"}
+                    />
                 </div>
 
-                {authError && <span className={'errorMessage'}>invalid email or password</span>}
+                {authError && (
+                    <span className={"errorMessage"}>
+                        invalid email or password
+                    </span>
+                )}
 
                 <div className={styles.loginFormLinks}>
-                    <a href="">Forgotten your password?</a>
-                    <Link to={'/register'}>Create account</Link>
+                    <Link to={"/register"}>Create account</Link>
                 </div>
                 <div className={styles.loginFormItem}>
                     <Button>Login</Button>

@@ -4,7 +4,6 @@ import styles from "../AdminPage.module.css";
 import {Button} from "../../common";
 import {AiOutlineEdit, AiOutlineDelete} from 'react-icons/ai';
 import {useNavigate} from "react-router-dom";
-import button from "../../common/Button/Button";
 import {useDeleteProductMutation} from "../../../store/products/productsAPI";
 import Pagination from "../../Pagination/Pagination";
 import {useAppDispatch} from "../../../store/store";

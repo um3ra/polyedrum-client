@@ -1,4 +1,3 @@
-import React from 'react';
 import {BsFacebook, BsInstagram, BsTwitter, BsTelegram} from "react-icons/bs"
 import {Button, Input} from "../common";
 import LOGO from "../../images/icon/logo_b.svg"
@@ -7,7 +6,7 @@ import {useGetCategoriesQuery} from "../../store/category/categoryAPI";
 import styles from './Footer.module.css';
 
 
-const Footer: React.FC = () => {
+const Footer = () => {
    const {data: categoryData} = useGetCategoriesQuery(null);
 
     return (
@@ -49,7 +48,7 @@ const Footer: React.FC = () => {
                 </div>
                 <div>
                     <form className={styles.signInForm}>
-                        <Input type="text" placeholder={"enter your email address"}/>
+                        <Input type="email" placeholder={"enter your email address"}/>
                         <Button>sign in</Button>
                     </form>
                     <ul className={styles.socialMedia}>
