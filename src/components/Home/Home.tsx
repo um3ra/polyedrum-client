@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import Banner from '../Banner/Banner';
 import ProductsCarousel from "../ProductCarousel/ProductsCarousel";
 import {getAllProducts} from "../../store/products/productsSlice";
@@ -7,17 +7,19 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useAppDispatch} from "../../store/store";
 
 
-const Home: React.FC = () => {
+const Home = () => {
     const productList = useTypedSelector(state => state.products.productList);
+    const isLoading = useTypedSelector(state => state.products.loading);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(getAllProducts({}))
     }, [dispatch])
 
-    if(!productList){
+    if(!productList || isLoading){
         return <Loader/>
     }
+
     return (
         <div>
             <Banner/>
