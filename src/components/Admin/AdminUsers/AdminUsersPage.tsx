@@ -5,18 +5,18 @@ import { AdminHeading } from "../AdminHeading/AdminHeading";
 import styles from "../AdminPage.module.css";
 
 const AdminUsersPage = () => {
-	const { data: userData } = useGetUsersQuery(null);
+    const { data: userData } = useGetUsersQuery(null);
 
-	if (!userData) {
-		return <SecondLoader />;
-	}
+    if (!userData) {
+        return <SecondLoader />;
+    }
 
-	return (
-		<div className={styles.adminContentWrapper}>
-			<AdminHeading title="Users" count={userData?.data.length} />
-			<AdminContent data={userData.data} />
-		</div>
-	);
+    return (
+        <div className={styles.adminContentWrapper}>
+            <AdminHeading title="Users" count={userData?.data.length} />
+            <AdminContent data={userData.data} />
+        </div>
+    );
 };
 
 export default AdminUsersPage;

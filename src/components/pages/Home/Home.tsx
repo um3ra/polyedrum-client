@@ -7,29 +7,29 @@ import ProductsCarousel from "../../ProductCarousel/ProductsCarousel";
 import { Loader } from "../../ui";
 
 const Home = () => {
-	const productList = useTypedSelector((state) => state.products.productList);
-	const isLoading = useTypedSelector((state) => state.products.loading);
-	const dispatch = useAppDispatch();
+    const productList = useTypedSelector((state) => state.products.productList);
+    const isLoading = useTypedSelector((state) => state.products.loading);
+    const dispatch = useAppDispatch();
 
-	useEffect(() => {
-		dispatch(getAllProducts({}));
-	}, [dispatch]);
+    useEffect(() => {
+        dispatch(getAllProducts({}));
+    }, [dispatch]);
 
-	if (!productList || isLoading) {
-		return <Loader />;
-	}
+    if (!productList || isLoading) {
+        return <Loader />;
+    }
 
-	return (
-		<div>
-			<Banner />
-			<ProductsCarousel list={productList} title={"Bestsellers"} />
-			<ProductsCarousel list={productList} title={"Top Fiction Books"} />
-			<ProductsCarousel
-				list={productList}
-				title={"Top Non-Fiction Books"}
-			/>
-		</div>
-	);
+    return (
+        <div>
+            <Banner />
+            <ProductsCarousel list={productList} title={"Bestsellers"} />
+            <ProductsCarousel list={productList} title={"Top Fiction Books"} />
+            <ProductsCarousel
+                list={productList}
+                title={"Top Non-Fiction Books"}
+            />
+        </div>
+    );
 };
 
 export default Home;

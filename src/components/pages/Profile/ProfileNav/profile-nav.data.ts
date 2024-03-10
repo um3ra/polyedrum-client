@@ -5,14 +5,14 @@ import { HiCash } from "react-icons/hi";
 import { BiDetail } from "react-icons/bi";
 
 export const PROFILE_NAV = [
-	{
-		icon: BiDetail,
-		link: "",
-		name: "Personal"
-	},
-	{
-		icon: HiCash,
-		link: "orders-history",
-		name: "Orders History"
-	}
+    {
+        icon: BiDetail,
+        link: "",
+        name: "Personal"
+    },
+    {
+        icon: HiCash,
+        link: "orders-history",
+        name: "Orders History"
+    }
 ];

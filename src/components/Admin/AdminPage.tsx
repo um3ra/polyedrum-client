@@ -4,12 +4,12 @@ import { WrapperWithNav } from "../ui";
 import styles from "./AdminPage.module.css";
 
 const AdminPage = () => (
-	<WrapperWithNav
-		mainClassName={styles.wrapper}
-		navRender={() => <AdminNav />}
-		mainRender={() => <Outlet />}
-		title="Admin panel"
-	/>
+    <WrapperWithNav
+        mainClassName={styles.wrapper}
+        navRender={() => <AdminNav />}
+        mainRender={() => <Outlet />}
+        title="Admin panel"
+    />
 );
 
 export default AdminPage;

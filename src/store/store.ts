@@ -3,49 +3,49 @@ import productsSlice from "./products/productsSlice";
 import { rootAPI } from "./api/rootAPI";
 import authSlice from "./auth/authSlice";
 import {
-	persistReducer,
-	persistStore,
-	FLUSH,
-	REHYDRATE,
-	PAUSE,
-	PERSIST,
-	PURGE,
-	REGISTER
+    persistReducer,
+    persistStore,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { useDispatch } from "react-redux";
 
 const persistConfig = {
-	key: "root",
-	version: 1,
-	storage,
-	whitelist: ["auth"]
+    key: "root",
+    version: 1,
+    storage,
+    whitelist: ["auth"]
 };
 
 const rootReducer = combineReducers({
-	auth: authSlice,
-	products: productsSlice,
-	[rootAPI.reducerPath]: rootAPI.reducer
+    auth: authSlice,
+    products: productsSlice,
+    [rootAPI.reducerPath]: rootAPI.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-	reducer: persistedReducer,
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({
-			serializableCheck: {
-				ignoredActions: [
-					FLUSH,
-					REHYDRATE,
-					PAUSE,
-					PERSIST,
-					PURGE,
-					REGISTER
-				]
-			}
-		}).concat(rootAPI.middleware),
-	devTools: true
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER
+                ]
+            }
+        }).concat(rootAPI.middleware),
+    devTools: true
 });
 
 export const persistor = persistStore(store);

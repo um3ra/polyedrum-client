@@ -22,58 +22,58 @@ import { Profile } from "../pages/Profile/Profile.1";
 import SingleBookPage from "../pages/SingleBookPage/SingleBookPage";
 
 const AppRouter = () => {
-	return (
-		<Routes>
-			<Route index element={<Home />} />
-			<Route path={"/collections/*"} element={<BooksPage />} />
-			<Route path={"/login"} element={<LoginForm />} />
-			<Route path={"/register"} element={<RegisterForm />} />
-			<Route
-				path={"/products/:productName"}
-				element={<SingleBookPage />}
-			/>
-			<Route path={"/profile"} element={<Profile />}>
-				<Route index element={<MyAccount />} />
-				<Route
-					path={"personal-details"}
-					element={<PersonalDetails />}
-				/>
-				<Route path={"orders-history"} element={<OrdersHistory />} />
-			</Route>
-			<Route path={"admin-panel"} element={<AdminPage />}>
-				<Route index element={<AdminUsersPage />} />
-				<Route path={"products"} element={<AdminPageProducts />} />
-				<Route
-					path={"products/create-product"}
-					element={<CreateProduct />}
-				/>
-				<Route
-					path={"products/update-product/:productName"}
-					element={<UpdateProductPage />}
-				/>
-				<Route path={"categories"} element={<AdminCategoriesPage />} />
-				<Route
-					path={"categories/create-category"}
-					element={<CreateCategory />}
-				/>
-				<Route
-					path={"categories/update-category/:categoryName"}
-					element={<EditCategoryPage />}
-				/>
-				<Route path={"genres"} element={<AdminGenrePage />} />
-				<Route
-					path={"genres/create-genre"}
-					element={<EditGenrePage />}
-				/>
-				<Route
-					path={"genres/update-genre/:genreName"}
-					element={<EditGenrePage />}
-				/>
-			</Route>
-			<Route path={"checkout"} element={<Checkout />} />
-			<Route path="*" element={<NotFound />} />
-		</Routes>
-	);
+    return (
+        <Routes>
+            <Route index element={<Home />} />
+            <Route path={"/collections/*"} element={<BooksPage />} />
+            <Route path={"/login"} element={<LoginForm />} />
+            <Route path={"/register"} element={<RegisterForm />} />
+            <Route
+                path={"/products/:productName"}
+                element={<SingleBookPage />}
+            />
+            <Route path={"/profile"} element={<Profile />}>
+                <Route index element={<MyAccount />} />
+                <Route
+                    path={"personal-details"}
+                    element={<PersonalDetails />}
+                />
+                <Route path={"orders-history"} element={<OrdersHistory />} />
+            </Route>
+            <Route path={"admin-panel"} element={<AdminPage />}>
+                <Route index element={<AdminUsersPage />} />
+                <Route path={"products"} element={<AdminPageProducts />} />
+                <Route
+                    path={"products/create-product"}
+                    element={<CreateProduct />}
+                />
+                <Route
+                    path={"products/update-product/:productName"}
+                    element={<UpdateProductPage />}
+                />
+                <Route path={"categories"} element={<AdminCategoriesPage />} />
+                <Route
+                    path={"categories/create-category"}
+                    element={<CreateCategory />}
+                />
+                <Route
+                    path={"categories/update-category/:categoryName"}
+                    element={<EditCategoryPage />}
+                />
+                <Route path={"genres"} element={<AdminGenrePage />} />
+                <Route
+                    path={"genres/create-genre"}
+                    element={<EditGenrePage />}
+                />
+                <Route
+                    path={"genres/update-genre/:genreName"}
+                    element={<EditGenrePage />}
+                />
+            </Route>
+            <Route path={"checkout"} element={<Checkout />} />
+            <Route path="*" element={<NotFound />} />
+        </Routes>
+    );
 };
 
 export default AppRouter;

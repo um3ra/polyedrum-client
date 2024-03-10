@@ -7,11 +7,11 @@ import store, { persistor } from "./store/store";
 import "./styles/index.css";
 
 createRoot(document.getElementById("root")!).render(
-	<BrowserRouter>
-		<Provider store={store}>
-			<PersistGate persistor={persistor}>
-				<App />
-			</PersistGate>
-		</Provider>
-	</BrowserRouter>
+    <BrowserRouter>
+        <Provider store={store}>
+            <PersistGate persistor={persistor}>
+                <App />
+            </PersistGate>
+        </Provider>
+    </BrowserRouter>
 );
