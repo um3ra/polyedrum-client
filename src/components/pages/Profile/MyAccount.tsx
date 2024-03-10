@@ -1,18 +1,20 @@
-import React from "react";
-import { Input, Button } from "../ui";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useUpdateUserDataMutation } from "../../store/user/userAPI";
 import styles from "./Profile.module.css";
 import { useOutletContext } from "react-router-dom";
-import { IProfile, IUser } from "../../@types/userType";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IProfile, IUser } from "../../../@types/userType";
+import { useGetUserOrdersQuery } from "../../../store/order/orderAPI";
+import { useUpdateUserDataMutation } from "../../../store/user/userAPI";
+import { Button, Input } from "../../ui";
 
-const PersonalDetails: React.FC = () => {
+const MyAccount = () => {
+	const profileData = useOutletContext<IProfile>();
 	const {
 		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm<IUser>();
-	const profileData = useOutletContext<IProfile>();
+	const { data: ordersData } = useGetUserOrdersQuery(null);
+
 	const [updateProfile, { error: profileError }] =
 		useUpdateUserDataMutation();
 
@@ -22,18 +24,16 @@ const PersonalDetails: React.FC = () => {
 
 	return (
 		<div className={styles.userProfileContent}>
-			<div className={styles.userProfileContentTitle}>
-				Your personal details
-			</div>
+			<h2 className={styles.title}>Personal information</h2>
 			<form
+				className={styles.myAccountForm}
 				onSubmit={handleSubmit(updateUserData)}
-				className={styles.userProfileContentForm}
 			>
 				<div>
-					<div>First name(s)</div>
 					<Input
+						label="First name(s):"
 						className={styles.transparentField}
-						defaultValue={profileData?.firstName}
+						defaultValue={profileData?.firstName || ""}
 						{...register("firstName", {
 							required: "field is required!",
 							maxLength: {
@@ -43,9 +43,11 @@ const PersonalDetails: React.FC = () => {
 						})}
 					/>
 				</div>
+
 				<div>
-					<div>Surname</div>
 					<Input
+						label="Last name:"
+						className={styles.transparentField}
 						defaultValue={profileData?.lastName}
 						{...register("lastName", {
 							required: "field is required!",
@@ -57,16 +59,40 @@ const PersonalDetails: React.FC = () => {
 					/>
 				</div>
 				<div>
-					<div>E-mail address</div>
-
-					<div>{profileData?.email}</div>
+					<Input
+						className={styles.transparentField}
+						label="Role:"
+						defaultValue={profileData?.role.toLowerCase()}
+						disabled
+					/>
 				</div>
 
-				<h4>Change Password</h4>
+				<div>
+					<div>
+						<Input
+							className={styles.transparentField}
+							label="Email:"
+							defaultValue={profileData?.email}
+							disabled
+						/>
+					</div>
+				</div>
 
 				<div>
-					<div>New password</div>
+					<div>
+						<Input
+							className={styles.transparentField}
+							label="Total orders count:"
+							defaultValue={ordersData?.data.length}
+							disabled
+						/>
+					</div>
+				</div>
+				<h4>Change Password</h4>
+				<div>
 					<Input
+						className={styles.transparentField}
+						label="New password"
 						{...register("password", {
 							minLength: {
 								value: 5,
@@ -80,8 +106,9 @@ const PersonalDetails: React.FC = () => {
 				</div>
 
 				<div>
-					<div>Matching password</div>
 					<Input
+						label="Matching password"
+						className={styles.transparentField}
 						{...register("matchingPassword")}
 						error={errors?.password?.message}
 						type="password"
@@ -94,10 +121,11 @@ const PersonalDetails: React.FC = () => {
 						</span>
 					</div>
 				)}
+
 				<Button>Update</Button>
 			</form>
 		</div>
 	);
 };
 
-export default PersonalDetails;
+export default MyAccount;

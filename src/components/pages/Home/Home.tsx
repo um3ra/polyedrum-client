@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import Banner from "../Banner/Banner";
-import ProductsCarousel from "../ProductCarousel/ProductsCarousel";
-import { getAllProducts } from "../../store/products/productsSlice";
-import { Loader } from "../ui";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useAppDispatch } from "../../store/store";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { getAllProducts } from "../../../store/products/productsSlice";
+import { useAppDispatch } from "../../../store/store";
+import Banner from "../../Banner/Banner";
+import ProductsCarousel from "../../ProductCarousel/ProductsCarousel";
+import { Loader } from "../../ui";
 
 const Home = () => {
 	const productList = useTypedSelector((state) => state.products.productList);

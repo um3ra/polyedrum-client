@@ -9,17 +9,17 @@ import AdminPageProducts from "../Admin/AdminProducts/AdminPageProducts";
 import CreateProduct from "../Admin/AdminProducts/CreateProduct";
 import UpdateProductPage from "../Admin/AdminProducts/UpdateProductPage";
 import AdminUsersPage from "../Admin/AdminUsers/AdminUsersPage";
-import LoginForm from "../Auth/LoginForm/LoginForm";
-import RegisterForm from "../Auth/RegisterForm/RegisterForm";
-import BooksPage from "../BooksPage/BooksPage";
-import Checkout from "../Checkout/Checkout";
-import Home from "../Home/Home";
-import OrdersHistory from "../Profile/OrdersHistory";
-import PersonalDetails from "../Profile/PersonalDetails";
-import Profile from "../Profile/Profile";
-import SingleBookPage from "../SingleBookPage/SingleBookPage";
-import MyAccount from "../Profile/MyAccount";
 import { NotFound } from "../NotFound/NotFound";
+import LoginForm from "../pages/Auth/LoginForm/LoginForm";
+import RegisterForm from "../pages/Auth/RegisterForm/RegisterForm";
+import BooksPage from "../pages/BooksPage/BooksPage";
+import Checkout from "../pages/Checkout/Checkout";
+import Home from "../pages/Home/Home";
+import MyAccount from "../pages/Profile/MyAccount";
+import OrdersHistory from "../pages/Profile/OrdersHistory";
+import PersonalDetails from "../pages/Profile/PersonalDetails";
+import { Profile } from "../pages/Profile/Profile.1";
+import SingleBookPage from "../pages/SingleBookPage/SingleBookPage";
 
 const AppRouter = () => {
 	return (

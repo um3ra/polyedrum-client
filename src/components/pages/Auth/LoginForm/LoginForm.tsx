@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { setAuthData } from "../../../store/auth/authSlice";
-import { Button, Input } from "../../ui";
 import styles from "../Auth.module.css";
 import { useDispatch } from "react-redux";
-import { useLoginMutation } from "../../../store/user/userAPI";
-import { IUser } from "../../../@types/userType";
+import { IUser } from "../../../../@types/userType";
+import { setAuthData } from "../../../../store/auth/authSlice";
+import { useLoginMutation } from "../../../../store/user/userAPI";
+import { Input, Button } from "../../../ui";
 
 const LoginForm = () => {
 	const dispatch = useDispatch();

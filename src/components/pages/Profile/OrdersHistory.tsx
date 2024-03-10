@@ -1,4 +1,4 @@
-import { useGetUserOrdersQuery } from "../../store/order/orderAPI";
+import { useGetUserOrdersQuery } from "../../../store/order/orderAPI";
 import styles from "./Profile.module.css";
 
 const OrdersHistory = () => {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useGetProductByNameQuery } from "../../store/products/productsAPI";
-import {
-	useAddProductToCartMutation,
-	useGetCartQuery
-} from "../../store/cart/cartAPI";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+    useAddProductToCartMutation,
+    useGetCartQuery
+} from "../../../store/cart/cartAPI";
+import { useGetProductByNameQuery } from "../../../store/products/productsAPI";
+import { Button, Loader, Modal } from "../../ui";
 import SingleBookDetails from "./SingleBookDetails";
-import { Button, Modal, Loader } from "../ui";
 import styles from "./SingleBookPage.module.css";
 
 const SingleBookPage = () => {

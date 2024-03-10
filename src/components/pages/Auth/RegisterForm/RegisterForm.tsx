@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { setAuthData } from "../../../store/auth/authSlice";
-import { Button, Input } from "../../ui";
 import styles from "../Auth.module.css";
-import { useRegisterMutation } from "../../../store/user/userAPI";
 import { useDispatch } from "react-redux";
-import { IUser } from "../../../@types/userType";
+import { IUser } from "../../../../@types/userType";
+import { setAuthData } from "../../../../store/auth/authSlice";
+import { useRegisterMutation } from "../../../../store/user/userAPI";
+import { Input, Button } from "../../../ui";
 
 const RegisterForm = () => {
 	const navigate = useNavigate();

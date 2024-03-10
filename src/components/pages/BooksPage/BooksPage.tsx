@@ -1,19 +1,18 @@
 import { useEffect } from "react";
-import Product from "../Product/Product";
-import Facet from "../Facet/Facet";
-import Pagination from "../Pagination/Pagination";
+import { useLocation } from "react-router-dom";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useGetCategoriesQuery } from "../../../store/category/categoryAPI";
+import { useGetAllProductAuthorsQuery } from "../../../store/products/productsAPI";
 import {
 	getAllProducts,
 	toggleCurrentSelection
-} from "../../store/products/productsSlice";
-import { useLocation } from "react-router-dom";
-import { Loader } from "../ui";
-import { useGetCategoriesQuery } from "../../store/category/categoryAPI";
-import { useGetAllProductAuthorsQuery } from "../../store/products/productsAPI";
+} from "../../../store/products/productsSlice";
+import { useAppDispatch } from "../../../store/store";
+import Facet from "../../Facet/Facet";
+import Pagination from "../../Pagination/Pagination";
+import Product from "../../Product/Product";
+import { SecondLoader } from "../../ui/SecondLoader/SecondLoader";
 import styles from "./BooksPage.module.css";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useAppDispatch } from "../../store/store";
-import { SecondLoader } from "../ui/SecondLoader/SecondLoader";
 
 const BooksPage = () => {
 	const products = useTypedSelector((state) => state.products.productList);

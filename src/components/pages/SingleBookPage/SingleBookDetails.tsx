@@ -1,5 +1,5 @@
 import React from "react";
-import { IProduct } from "../../@types/productType";
+import { IProduct } from "../../../@types/productType";
 
 interface SingleBookDetailsProps {
 	productData: IProduct;
