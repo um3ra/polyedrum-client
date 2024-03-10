@@ -19,6 +19,7 @@ import PersonalDetails from "../Profile/PersonalDetails";
 import Profile from "../Profile/Profile";
 import SingleBookPage from "../SingleBookPage/SingleBookPage";
 import MyAccount from "../Profile/MyAccount";
+import { NotFound } from "../NotFound/NotFound";
 
 const AppRouter = () => {
 	return (
@@ -70,6 +71,7 @@ const AppRouter = () => {
 				/>
 			</Route>
 			<Route path={"checkout"} element={<Checkout />} />
+			<Route path="*" element={<NotFound/>}/>
 		</Routes>
 	);
 };
