@@ -71,7 +71,7 @@ const AppRouter = () => {
 				/>
 			</Route>
 			<Route path={"checkout"} element={<Checkout />} />
-			<Route path="*" element={<NotFound/>}/>
+			<Route path="*" element={<NotFound />} />
 		</Routes>
 	);
 };

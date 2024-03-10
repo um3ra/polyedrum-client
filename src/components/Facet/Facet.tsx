@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styles from "./Facet.module.css";
 import qs from "query-string";
 import { useDispatch } from "react-redux";
@@ -13,7 +12,7 @@ interface FacetProps {
 	categoryData: ICategory[];
 }
 
-const Facet: React.FC<FacetProps> = ({ authorData, categoryData }) => {
+const Facet = ({ authorData, categoryData }: FacetProps) => {
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();

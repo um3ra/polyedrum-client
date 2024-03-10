@@ -3,7 +3,6 @@ import { ProfileNav } from "./ProfileNav/ProfileNav";
 import { Loader, WrapperWithNav } from "../../ui";
 import { useGetUserProfileQuery } from "../../../store/user/userAPI";
 
-
 export const Profile = () => {
 	const { data: profileData } = useGetUserProfileQuery(null);
 

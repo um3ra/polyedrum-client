@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import CART from "../../images/icon/cart.svg";
 import { Button } from "../ui";
@@ -6,14 +5,8 @@ import { useAddProductToCartMutation } from "../../store/cart/cartAPI";
 import { IProductsItem } from "../../@types/productType";
 import styles from "./Product.module.css";
 
-const Product: React.FC<IProductsItem> = ({
-	id,
-	title,
-	price,
-	img,
-	author
-}) => {
-	const [addProduct] = useAddProductToCartMutation();
+const Product = ({ id, title, price, img, author }: IProductsItem) => {
+	const [addProduct, { isLoading }] = useAddProductToCartMutation();
 	const navigate = useNavigate();
 
 	return (
@@ -33,6 +26,7 @@ const Product: React.FC<IProductsItem> = ({
 					<div className={styles.collectionCardPrice}>{price} $</div>
 				</div>
 				<Button
+					disabled={isLoading}
 					onClick={() => id && addProduct(id)}
 					addClass={styles.collectionCardBtn}
 				>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-    useAddProductToCartMutation,
-    useGetCartQuery
+	useAddProductToCartMutation,
+	useGetCartQuery
 } from "../../../store/cart/cartAPI";
 import { useGetProductByNameQuery } from "../../../store/products/productsAPI";
 import { Button, Loader, Modal } from "../../ui";
