@@ -1,0 +1,21 @@
+.editList{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* height: 100px; */
+    gap: 1em;
+    background-color: var(--white);
+    color: black;
+    /* overflow-y: auto; */
+    /* width: 200px; */
+    
+}
+.editList>li{
+    background-color: black;
+    /* display: flex;
+    justify-content: space-between; */
+    /* padding: 0 .5em; */
+}
+
+.editList>li>div{
+    
+}

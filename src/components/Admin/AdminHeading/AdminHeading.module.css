@@ -1,0 +1,20 @@
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2em 0;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title > * {
+    padding: 0 0.5em;
+}
+
+.title > :first-child {
+    border-right: 1px solid hsl(var(--grey) / 0.3);
+}

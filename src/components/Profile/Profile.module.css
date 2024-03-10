@@ -1,7 +1,5 @@
-.userProfileBlock{
-    display: flex;
-    padding: 200px 10%;
-    justify-content: space-evenly;
+.title{
+    color: hsl(var(--grey));
 }
 
 .userProfileContentTitle{
@@ -13,8 +11,22 @@
     font-size: .7em;
 }
 
-.userProfileContent{
-    width: 50%;
+.myAccountForm{
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+
+.userProfileContent::before{
+    position: absolute;
+    top: 4em;
+    left: 0;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: hsl(var(--grey)/.3);
 }
 
 .userProfileContentTitle>span{
@@ -22,40 +34,35 @@
     color: var(--dark-grey-blue);
     font-weight: 700;
     font-style: italic;
-
 }
 
 .userProfileNavBar{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    border-radius: 5px;
-    background-color: #AACDDD;
-    height: 15em;
+    gap: .5em;
+}
+
+.navItem{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navItem.active{
+    background-color: hsl(var(--moonstone-blue));
+    color: white;
 }
 
 .userProfileNavBar a{
     transition: all .3s;
     line-height: 1.6em;
-    padding-left: 20px;
-    margin-right: 20px;
-}
-
-.userProfileNavBar a:hover{
-    color: var(--white);
-    background-color: var(--dark-grey-blue);
+    padding: .3em;
 }
 
 .userProfileContentForm div{
     padding: 5px 0;
 }
-
-.userProfileContentOrders{
-    height: 400px;
-    overflow-y: scroll;
-}
 .userProfileContentOrders>li{
-
     padding: 5px 0;
 }
 
@@ -80,4 +87,18 @@
 
 .currentOrdersItem span{
     font-weight: 700;
+}
+
+.transparentField{
+    box-shadow: 0 2px 4px 1px hsl(var(--grey)/.2);
+    border: none;
+}
+
+.transparentField:disabled{
+    /* background-color: hsl(var(--grey)/.01); */
+}
+
+.transparentField:focus{
+    outline: none;
+    background-color: white;
 }

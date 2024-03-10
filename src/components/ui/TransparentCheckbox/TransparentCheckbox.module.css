@@ -1,0 +1,37 @@
+.wrapper {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    padding: .4em;
+    border: solid 2px black;
+    border-radius: 32px;
+    color: black;
+    overflow: hidden;
+    font-size: .8em;
+    text-align: center;
+}
+
+.wrapper label {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: background 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.wrapper input {
+    display: none;
+}
+
+
+.wrapper span {
+    position: relative;
+    transition: color 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+.wrapper input:checked+label{
+    background: var(--turquoise);
+}

@@ -8,6 +8,11 @@
     z-index: 201;
 }
 
+.menuList{
+    max-height: 10em;
+    overflow-y: auto;
+}
+
 .hamburgerMenu{
     line-height: 1.7;
     position: absolute;
@@ -52,7 +57,7 @@
 }
 
 .hamburgerMenuListItem:hover{
-    color: #072E33;
+    color: #072e33;
 }
 
 .hamburgerMenuBtn{
@@ -77,16 +82,20 @@
 }
 
 .hamburgerMenuEnterActive{
-    max-height: 100%;
+    opacity: 1;
+    max-height: 1000%;
 }
 .hamburgerMenuEnterDone{
-    max-height: 100%;
+    opacity: 1;
+    max-height: 1000%;
 }
 .hamburgerMenuExitActive{
+    opacity: 0;
     max-height: 0;
 }
 .hamburgerMenuExit{
-    max-height: 100%;
+    opacity: 1;
+    max-height: 1000%;
 }
 .hamburgerMenuEnterActive>div{
     opacity: 1;
@@ -94,4 +103,12 @@
 }
 .hamburgerMenuEnterDone>div{
     opacity: 1;
+}
+
+
+.booksBlock{
+    scrollbar-color: white hsl(var(--moonstone-blue)/ 0);
+    scrollbar-shadow-color: #ffffff;
+    max-height: 30em;
+    overflow-y: auto;
 }

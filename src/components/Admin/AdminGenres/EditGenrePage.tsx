@@ -1,55 +1,71 @@
-import React, {useEffect} from 'react';
-import {SubmitHandler, useForm} from "react-hook-form";
-import {useNavigate, useParams} from "react-router-dom";
-import {useGetGenreByNameQuery, useUpdateGenreMutation} from "../../../store/genre/genreAPI";
-import {Input} from "../../common";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+	useCreateGenreMutation,
+	useGetGenreByNameQuery,
+	useUpdateGenreMutation
+} from "../../../store/genre/genreAPI";
+import { Input, SecondLoader } from "../../ui";
 import AdminForm from "../AdminForm";
-import styles from '../AdminPage.module.css';
-import {IGenre} from "../../../@types/genreType";
+import styles from "../AdminPage.module.css";
+import { IGenre } from "../../../@types/genreType";
+import { extractError } from "../../../store/api";
 
-const EditGenrePage: React.FC = () => {
-    const {register, handleSubmit} = useForm<IGenre>({mode: "onChange"});
-    const {genreName} = useParams();
-    const {data: genreData} = useGetGenreByNameQuery(genreName ?? '');
-    const [updateGenre, {isSuccess , error: updateGenreError}] = useUpdateGenreMutation();
-    const navigate = useNavigate();
+const EditGenrePage = () => {
+	const { register, handleSubmit } = useForm<IGenre>({ mode: "onChange" });
+	const { pathname } = useLocation();
+	const { genreName } = useParams();
+	const { data: genreData } = useGetGenreByNameQuery(genreName ?? "");
+	const [updateGenre, { isSuccess: updateSuccess, error: updateGenreError }] =
+		useUpdateGenreMutation();
+	const [createGenre, { error: createGenreError, isSuccess: createSuccess }] =
+		useCreateGenreMutation();
+	const navigate = useNavigate();
+	const isUpdate = pathname.includes("update-genre");
 
-    useEffect(() => {
-        if (isSuccess){
-            navigate("/admin-panel/genres");
-        }
-    }, [isSuccess])
+	useEffect(() => {
+		if (updateSuccess || createSuccess) {
+			navigate("/admin-panel/genres");
+		}
+	}, [updateSuccess, createSuccess]);
 
-    if (!genreData){
-        return <div>Loading</div>
-    }
+	if (isUpdate && !genreData) {
+		return <SecondLoader />;
+	}
 
-    const onSubmit: SubmitHandler<IGenre> = data => {
-        updateGenre({name: genreData.data.name, data})
-    }
+	const onSubmit: SubmitHandler<IGenre> = (data) => {
+		if (isUpdate && genreData) {
+			updateGenre({ name: genreData.data.name, data });
+		} else {
+			createGenre(data);
+		}
+	};
 
-    return (
-        <AdminForm
-            title={'Edit Genre'}
-            btnTitle={'Update'}
-            error={
-                updateGenreError&& 'data' in updateGenreError ?
-                    updateGenreError.data.message : ''
-            }
-            submit={handleSubmit(onSubmit)}
-        >
-            <div className={styles.adminContentFormBlock}>
-                <p>
-                    Name
-                </p>
-                <Input register={{
-                    ...register("name", {
-                        required: true
-                    })
-                }} defaultValue={genreData.data.name}/>
-            </div>
-        </AdminForm>
-    );
+	return (
+		<AdminForm
+			title={isUpdate ? "Edit Genre" : "Create Genre"}
+			btnTitle={"Save"}
+			error={
+				updateGenreError
+					? extractError(updateGenreError)
+					: createGenreError && extractError(createGenreError)
+			}
+			submit={handleSubmit(onSubmit)}
+		>
+			<div className={styles.adminContentFormBlock}>
+				<Input
+					label="Name"
+					{...register("name", {
+						required: true
+					})}
+					defaultValue={
+						isUpdate && genreData ? genreData.data.name : ""
+					}
+				/>
+			</div>
+		</AdminForm>
+	);
 };
 
 export default EditGenrePage;

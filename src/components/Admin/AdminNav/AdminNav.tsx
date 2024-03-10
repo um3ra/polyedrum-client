@@ -1,31 +1,27 @@
-import React, {useState} from 'react';
-import {useLocation} from 'react-router-dom';
-import AdminNavItem from './AdminNavItem';
-import styles from '../AdminPage.module.css';
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import AdminNavItem from "./AdminNavItem";
+import styles from "./AdminNav.module.css";
 
-const AdminNav: React.FC = () => {
-    const location = useLocation();
-    const currentLocation = location.pathname.split("/")[2];
-    const [currentNavSelection, setCurrentNavSelection] = useState(currentLocation);
-    return (
-        <ul className={styles.adminNav}>
-            <AdminNavItem path={currentNavSelection}
-                          name={'users'}
-                          setPath={setCurrentNavSelection}/>
+const AdminNav = () => {
+	const location = useLocation();
+	const currentLocation = location.pathname.split("/")[2];
+	const [currentNavSelection, setCurrentNavSelection] =
+		useState(currentLocation);
+	const names = ["users", "products", "categories", "genres"];
 
-            <AdminNavItem path={currentNavSelection}
-                          name={'products'}
-                          setPath={setCurrentNavSelection}/>
-
-            <AdminNavItem path={currentNavSelection}
-                          name={'categories'}
-                          setPath={setCurrentNavSelection}/>
-
-            <AdminNavItem path={currentNavSelection}
-                          name={'genres'}
-                          setPath={setCurrentNavSelection}/>
-        </ul>
-    );
+	return (
+		<ul className={styles.adminNav}>
+			{names.map((el) => (
+				<AdminNavItem
+					key={el}
+					path={currentNavSelection}
+					name={el}
+					setPath={setCurrentNavSelection}
+				/>
+			))}
+		</ul>
+	);
 };
 
 export default AdminNav;

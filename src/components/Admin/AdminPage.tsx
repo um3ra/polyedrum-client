@@ -1,13 +1,15 @@
-import React from 'react';
 import AdminNav from "./AdminNav/AdminNav";
-import {Outlet} from "react-router-dom";
-import styles from './AdminPage.module.css';
+import { Outlet } from "react-router-dom";
+import { WrapperWithNav } from "../ui";
+import styles from "./AdminPage.module.css";
 
-const AdminPage: React.FC = () => (
-    <div className={`fix-wrapper ${styles.adminBlock}`}>
-        <AdminNav/>
-        <Outlet/>
-    </div>
+const AdminPage = () => (
+	<WrapperWithNav
+		mainClassName={styles.wrapper}
+		navRender={() => <AdminNav />}
+		mainRender={() => <Outlet />}
+		title="Admin panel"
+	/>
 );
 
 export default AdminPage;

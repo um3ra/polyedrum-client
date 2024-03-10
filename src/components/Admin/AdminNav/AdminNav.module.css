@@ -1,0 +1,13 @@
+.adminNav{
+    text-align: center;
+}
+
+.adminNav li{
+    width: 100%;
+}
+
+.adminNav a {
+    font-size: 1.05em;
+    display: block;
+    padding: 15px;
+}

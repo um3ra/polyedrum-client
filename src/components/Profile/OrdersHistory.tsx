@@ -1,46 +1,47 @@
-import React from 'react';
-import styles from './Profile.module.css';
-import {useGetUserOrdersQuery} from "../../store/order/orderAPI";
+import { useGetUserOrdersQuery } from "../../store/order/orderAPI";
+import styles from "./Profile.module.css";
 
-const OrdersHistory: React.FC = () => {
-    const {data: orderData} = useGetUserOrdersQuery(null);
+const OrdersHistory = () => {
+	const { data: orderData } = useGetUserOrdersQuery(null);
 
-    if (!orderData){
-        return <div>Loading</div>
-    }
+	if (!orderData) {
+		return <div>Loading</div>;
+	}
 
-    return (
-        <div className={styles.userProfileContent}>
-            <div className={styles.userProfileContentTitle}>Orders History</div>
+	return (
+		<div className={styles.userProfileContent}>
+			<h2 className={styles.title}>Orders History</h2>
 
-            <ul className={styles.userProfileContentOrders}>
-                {orderData.data.map(order => {
-                    return (
-                        <li key={order.id}>
-                            <ul className={styles.ordersItem}>
-                                <li>
-                                    <span style={{fontWeight: "700"}}>Id: </span>
-                                    {order.id}
-                                </li>
-                                <li>
-                                    <span style={{fontWeight: "700"}}>Status: </span>
-                                    {order.status}
-                                </li>
-                                <li>
-                                    <span style={{fontWeight: "700"}}>Date: </span>
-                                    {order.dateOfCreation}
-                                </li>
-                                <li>
-                                    <span style={{fontWeight: "700"}}>Sum: </span>
-                                    {order.sum} $
-                                </li>
-                            </ul>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
-    );
+			{!orderData.data.length && <h3>You have no orders yet</h3>}
+
+			<ul className={styles.userProfileContentOrders}>
+				{orderData.data.map((order) => {
+					return (
+						<li key={order.id}>
+							<ul className={styles.ordersItem}>
+								<li>
+									<strong>Id: </strong>
+									{order.id}
+								</li>
+								<li>
+									<strong>Status: </strong>
+									{order.status}
+								</li>
+								<li>
+									<strong>Date: </strong>
+									{order.dateOfCreation}
+								</li>
+								<li>
+									<strong>Sum: </strong>
+									{order.sum} $
+								</li>
+							</ul>
+						</li>
+					);
+				})}
+			</ul>
+		</div>
+	);
 };
 
 export default OrdersHistory;

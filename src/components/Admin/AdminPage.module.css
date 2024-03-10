@@ -1,61 +1,14 @@
-.adminContentWrapper{
+.wrapper{
     overflow-x: auto;
-    overflow-y: hidden;
 }
 
 .adminBlock{
     display: flex;
-    margin: 200px auto !important;
-    box-sizing: border-box;
-    background-color: rgba(118,166,193,0.13);
 }
 
 .adminContent{
     display: flex;
-    overflow: auto;
     margin: 0 auto;
-}
-
-.adminContent>form{
-    margin: 0 auto;
-}
-
-.adminInnerContent::-webkit-scrollbar{
-}
-
-.adminNav{
-    padding: 20px;
-    background-color: #AACDDD;
-}
-
-.adminNav li {
-    width: 100%;
-}
-
-.adminInnerContent{
-    display: flex;
-    overflow: auto;
-}
-
-.adminContentBtns{
-    color: var(--white);
-    background-color: var(--dark-grey-blue);
-}
-
-.adminContentBtns>div{
-    width: 100px;
-    text-align: center;
-}
-
-
-.adminContentBtns button{
-    border-radius: 10px;
-    transition: all .4s;
-    margin: 0 2px;
-}
-
-.adminContent>li{
-    padding: 0 10px;
 }
 
 .adminContentList{
@@ -79,14 +32,6 @@
     padding: 0;
     width: 100%;
 }
-
-.adminContentBtnsDelete:hover{
-    background-color: #B70E1C;
-}
-.adminContentBtnsEdit:hover{
-    background-color: #298145;
-}
-
 .adminContentList>li:first-child{
     font-size: 1.1em;
     font-weight: 600;
@@ -99,16 +44,65 @@
 }
 
 .adminContentForm{
-    height: 100vh;
-    width: 100%;
-    color: var(--white);
-    background-color: var(--dark-grey-blue) !important;
+   width: 100%;
+   display: flex;
+   justify-content: center;
 }
 
-.adminContentFormBlock p{
-    padding-top: 2em;
+.adminContentForm h2{
+    color: hsl(var(--grey));
 }
+
+.adminContentFormBlock{
+    display: flex;
+    gap: 2em;
+    margin: 3em 0;
+}
+
 
 .adminContentFormButton{
     margin: 50px 0;
 }
+
+
+.genresList {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* .genresList>*{
+    text-align: center;
+    padding: .5em;
+    border-radius: 10px;
+    background-color: hsl(var(--grey)/.3);
+} */
+
+/* .genresList input {
+    display: none;
+
+    &:checked {
+      + label {
+        background: #212121;
+        
+        + span {
+          color: #fafafa;
+        }
+      }
+    }
+}
+.genresListItem{
+    position: relative;
+} */
+
+/* .genresListItem input:checked+label {
+    background: #212121;
+}
+.genresListItem>label {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    background: #fafafa;
+    transition: background .2s ease-in-out;
+    cursor: pointer;
+} */

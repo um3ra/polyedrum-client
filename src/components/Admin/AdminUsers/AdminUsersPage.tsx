@@ -1,42 +1,22 @@
-import React from 'react';
-import {useGetUsersQuery} from "../../../store/user/userAPI";
+import { useGetUsersQuery } from "../../../store/user/userAPI";
+import { SecondLoader } from "../../ui";
+import { AdminContent } from "../AdminContent/AdminContent";
+import { AdminHeading } from "../AdminHeading/AdminHeading";
 import styles from "../AdminPage.module.css";
 
-const AdminUsersPage: React.FC = () => {
-    const {data: userData} = useGetUsersQuery(null);
+const AdminUsersPage = () => {
+	const { data: userData } = useGetUsersQuery(null);
 
-    if (!userData){
-        return <div>Loading</div>
-    }
+	if (!userData) {
+		return <SecondLoader />;
+	}
 
-    return (
-        <div className={styles.adminContent}>
-            <ul className={styles.adminContentList}>
-                <li>firstname</li>
-                {userData.data.map(user => {
-                    return <li key={user.firstName}>
-                        {user.firstName}
-                    </li>
-                })}
-            </ul>
-
-            <ul className={styles.adminContentList}>
-                <li>lastname</li>
-                {userData.data.map(user => {
-                    return <li key={user.firstName}>
-                        {user.lastName}
-                    </li>
-                })}
-            </ul>
-
-            <ul className={styles.adminContentList}>
-                <li>password</li>
-                {userData.data.map(user => {
-                    return <li key={user.firstName}>{user.password}</li>
-                })}
-            </ul>
-        </div>
-    );
+	return (
+		<div className={styles.adminContentWrapper}>
+			<AdminHeading title="Users" count={userData?.data.length} />
+			<AdminContent data={userData.data} />
+		</div>
+	);
 };
 
 export default AdminUsersPage;

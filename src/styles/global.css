@@ -1,90 +1,114 @@
-body{
-    font-family: 'Open Sans', sans-serif;
+body {
+    font-family: "Open Sans", sans-serif;
     padding: 0;
     margin: 0;
     height: 100%;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.5;
 }
 
-*, :after, :before {
+*,
+:after,
+:before {
     box-sizing: inherit;
 }
 
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.fix-wrapper{
+.fix-wrapper {
     max-width: 1600px;
     margin: 0 auto;
+    padding: 0 2em;
 }
 
-ul{
+ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-a{
+a {
     text-decoration: none;
-    color: #05161A;
+    color: #05161a;
 }
 
-main{
+main {
     flex: 1 1 auto;
+    min-height: 70vh;
 }
 
-input, textarea{
+input,
+textarea {
     font-size: 1em;
 }
 
-.inp-text{
+.inp-text {
     padding: 5px;
     border-radius: 5px;
 }
 
-.inp-text:hover{
+.inp-text:hover {
     border-color: var(--black-pearl);
 }
 
-.inp-text:focus{
-    background-color: #F2F6FB;
-    transition: all .4s;
+.inp-text:focus {
+    background-color: #f2f6fb;
+    transition: all 0.4s;
 }
 
-.menu-list{
+.menu-list {
     list-style: none;
     padding-left: 0;
 }
 
-.swiper-button-prev::after, .swiper-button-next::after{
-    color: var(--moonstone-blue);
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    color: hsl(var(--moonstone-blue));
     font-size: 50px;
     font-weight: 700;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
-.errorMessage{
-    color: #B70E1C;
+.errorMessage {
+    color: #b70e1c;
     font-weight: 600;
 }
 
-.successMessage{
+.successMessage {
     color: #00bc16;
     font-weight: 600;
 }
 
-@media only screen and (max-width: 1366px){
-    body{
+@media only screen and (max-width: 1366px) {
+    body {
         font-size: 18px;
     }
 }
 
-@media only screen and (max-width: 992px){
-    body{
+@media only screen and (max-width: 992px) {
+    body {
         font-size: 16px;
     }
 }
+
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    box-shadow: inset 0 0 3px hsl(var(--grey)/.8);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: var(--black-pearl);
+}
+
+/* ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--moonstone-blue)/.1);
+} */

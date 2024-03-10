@@ -19,7 +19,7 @@
 }
 
 .collectionCard:hover{
-    box-shadow: 0 0 10px var(--grey);
+    box-shadow: 0 0 10px hsl(var(--grey));
 }
 
 .collectionCardImage{

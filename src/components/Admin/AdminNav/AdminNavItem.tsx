@@ -1,19 +1,26 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "../AdminPage.module.css";
+import clsx from "clsx";
 
-interface AdminNavItem {
-    name: string
-    path: string
-    setPath: (name: string) => void
+interface AdminNavItemProps {
+	name: string;
+	path: string;
+	setPath: (name: string) => void;
 }
 
-const AdminNavItem: React.FC<AdminNavItem> = ({name, path, setPath}) => (
-    <li onClick={() => setPath(name)}>
-        <Link className={path === name ? styles.adminNavItemActive : ''} to={name}>
-            {name}
-        </Link>
-    </li>
+const AdminNavItem = ({ name, path, setPath }: AdminNavItemProps) => (
+	<li>
+		<Link
+			onClick={() => setPath(name)}
+			className={clsx(
+				(path === name || (!path && name === "users")) &&
+					styles.adminNavItemActive
+			)}
+			to={name === "users" ? "" : name}
+		>
+			{name}
+		</Link>
+	</li>
 );
 
 export default AdminNavItem;

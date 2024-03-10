@@ -1,13 +1,17 @@
+header{
+    top: 0;
+    position: sticky;
+    z-index: 200;
+}
 .mainHeader{
     background-color: var(--dark-grey-blue);
-
 }
 
 .headerBlock{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 1em;
 }
 
 .headerInnerBlock{

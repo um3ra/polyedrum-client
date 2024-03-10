@@ -1,76 +1,79 @@
-import {IGenre} from "./genreType";
+import { IGenre } from "./genreType";
 
 export enum EnumOrder {
-    ASC='ASC', DESC='DESC'
+	ASC = "ASC",
+	DESC = "DESC"
 }
 
 export enum EnumSort {
-    TITLE='title', PRICE='price', AUTHOR='author'
+	TITLE = "title",
+	PRICE = "price",
+	AUTHOR = "author"
 }
 
-export interface IProductsItem{
-    id?: number
-    title: string
-    price: number
-    img?: string
-    author: string
+export interface IProductsItem {
+	id: number;
+	title: string;
+	price: number;
+	img?: string;
+	author: string;
 }
 
-export interface IProductAdditional{
-    description: string
-    numberOfPages: number
-    publisher: string
-    weight: number
+export interface IProductAdditional {
+	description: string;
+	numberOfPages: number;
+	publisher: string;
+	weight: number;
 }
 
-export interface IProduct extends IProductsItem{
-    genres?: IGenre[]
-    additional: IProductAdditional
-    imageURL?: string
+export interface IProduct extends IProductsItem {
+	genres?: IGenre[];
+	additional: IProductAdditional;
+	imageURL?: string;
 }
 
 export interface IPagination {
-    pageNo: number
-    pageSize: number
-    totalCount: number | null
-    totalPages: number | null
+	pageNo: number;
+	pageSize: number;
+	totalCount: number | null;
+	totalPages: number | null;
 }
 
 export interface ICurrentSelection {
-    selectionName: string | null
-    selectionType: string | null
+	selectionName: string | null;
+	selectionType: string | null;
 }
 
-interface IProductsFilter{
-    currentSelection: ICurrentSelection
-    order: EnumOrder
-    sort: EnumSort
-    pagination: IPagination
-    destination: string
+interface IProductsFilter {
+	currentSelection: ICurrentSelection;
+	order: EnumOrder;
+	sort: EnumSort;
+	pagination: IPagination;
+	destination: string;
 }
 
-export interface IProductsState{
-    productList: Array<IProductsItem> | null
-    loading: boolean
-    filter: IProductsFilter
+export interface IProductsState {
+	productList: Array<IProductsItem> | null;
+	loading: boolean;
+	filter: IProductsFilter;
 }
 
-export interface IAuthor extends IGenre{}
+export interface IAuthor extends IGenre {}
 
-export interface IGetAllProductsParams{
-    name?: string
-    sortType?: string
-    pageNo?: number
+export interface IGetAllProductsParams {
+	name?: string;
+	sortType?: string;
+	pageNo?: number;
 }
 
-export interface IProductFormFields extends IProduct{
-    description: string
-    numberOfPages: number
-    weight: number
-    publisher: string
-    productImage: string
+export interface IProductFormFields extends IProduct {
+	description: string;
+	numberOfPages: number;
+	weight: number;
+	publisher: string;
+	productImage: string;
 }
 
-export interface IProductsResponse extends IPagination{
-    items: Array<IProductsItem>
+export interface IProductsResponse extends IPagination {
+	items: Array<IProductsItem>;
 }

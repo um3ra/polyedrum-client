@@ -3,7 +3,7 @@
     width: 26em;
     min-width: 16em;
     border-radius: 5px;
-    border: var(--moonstone-blue) 2px solid;
+    border: hsl(var(--moonstone-blue)) 2px solid;
     margin: 0 auto;
 }
 .select{

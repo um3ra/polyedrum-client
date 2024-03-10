@@ -55,7 +55,7 @@
     left: 0;
     right: 0;
     background-color: var(--white);
-    box-shadow: 0 0 10px var(--grey);
+    box-shadow: 0 0 10px hsl(var(--grey));
 
 
 }
@@ -67,7 +67,7 @@
 }
 
 .subNavigationList a{
-    color: var(--grey);
+    color: hsl(var(--grey));
 }
 .subNavigationList a:hover{
     color: var(--turquoise);

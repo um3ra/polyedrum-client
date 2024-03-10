@@ -1,0 +1,17 @@
+.button{
+    background-color: hsl(var(--moonstone-blue));
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px var(--firefly) solid;
+    transition: all .3s;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.button:disabled{
+    background-color: hsl(var(--grey)/.8);
+}
+
+button:hover{
+    background-color: var(--turquoise);
+}

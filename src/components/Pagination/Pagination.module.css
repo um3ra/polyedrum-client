@@ -3,7 +3,7 @@
     display: flex;
     background-color: #F8F8F8;
     border-radius: 5px;
-    border: var(--moonstone-blue) 2px solid;
+    border: hsl(var(--moonstone-blue)) 2px solid;
     width: 60%;
     margin: 0 auto;
     height: 2em;
@@ -36,7 +36,7 @@
     justify-content: end;
 }
 .arrowRight:hover, .arrowLeft:hover{
-    background-color: var(--moonstone-blue);
+    background-color: hsl(var(--moonstone-blue));
 }
 
 .paginationItem svg{

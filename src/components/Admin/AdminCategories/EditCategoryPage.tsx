@@ -1,86 +1,93 @@
-import React, {useEffect} from 'react';
-import {EditList, Input} from "../../common";
-import {SubmitHandler, useForm} from "react-hook-form";
+import { useEffect } from "react";
+import { Input, SecondLoader, TransparentCheckbox } from "../../ui";
+import { SubmitHandler, useForm } from "react-hook-form";
 import {
-    useDeleteGenreFromCategoryMutation,
-    useGetCategoryByNameQuery,
-    useAddGenreToCategoryMutation,
-    useUpdateCategoryByNameMutation,
+	useGetCategoryByNameQuery,
+	useUpdateCategoryByNameMutation,
+	useUpdateCategoryGenresMutation
 } from "../../../store/category/categoryAPI";
-import {useNavigate, useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AdminForm from "../AdminForm";
 import styles from "../AdminPage.module.css";
-import {ICategory} from "../../../@types/categoryType";
+import { ICategory } from "../../../@types/categoryType";
+import { useGetGenresQuery } from "../../../store/genre/genreAPI";
 
-const EditCategoryPage: React.FC = () => {
+const EditCategoryPage = () => {
+	const { register, handleSubmit } = useForm<
+		ICategory & { genre: string } & { genreNames: string[] }
+	>();
+	const { categoryName } = useParams();
+	const { data: categoryData } = useGetCategoryByNameQuery(
+		categoryName ?? ""
+	);
+	const { data: genreData } = useGetGenresQuery(null);
+	const [updateCategory, { error: updateGenreError, isSuccess }] =
+		useUpdateCategoryByNameMutation();
 
-    const {register, getValues, handleSubmit} = useForm<ICategory & {genre: string}>();
-    const {categoryName} = useParams();
-    const {data: categoryData} = useGetCategoryByNameQuery(categoryName ?? '');
-    const [deleteGenre] = useDeleteGenreFromCategoryMutation();
-    const [addGenre, {data: addGenreData, error: addGenreError}] = useAddGenreToCategoryMutation();
-    const [updateCategory, {error: updateGenreError, isSuccess}] = useUpdateCategoryByNameMutation();
-    const navigate = useNavigate();
+	const navigate = useNavigate();
+	const [updateGenres] = useUpdateCategoryGenresMutation();
 
-    useEffect(() => {
-        if (isSuccess){
-            navigate("/admin-panel/categories")
-        }
-    }, [isSuccess])
+	useEffect(() => {
+		if (isSuccess) {
+			navigate("/admin-panel/categories");
+		}
+	}, [isSuccess]);
 
-    if (!categoryData) {
-        return <div>Loading...</div>
-    }
+	if (!genreData || !categoryData) return <SecondLoader />;
 
-    const addNewGenre = () => {
-        const newGenre = getValues("genre");
-        addGenre({category: categoryData.data.name, genre: newGenre})
-    }
+	const onSubmit: SubmitHandler<ICategory & { genreNames: string[] }> = (
+		data
+	) => {
+		updateCategory({
+			id: categoryData.data.id,
+			categoryData: data
+		});
 
-    const deleteGenreCallback = (genre: string) => {
-        deleteGenre({category: categoryData.data.name, genre})
-    }
+		updateGenres({
+			id: categoryData.data.id,
+			genres: data.genreNames
+		});
+	};
 
-    const onSubmit: SubmitHandler<ICategory> = (data) => {
-        updateCategory({
-            name: categoryData.data.name,
-            categoryData: data,
-        })
-    }
+	return (
+		<AdminForm
+			title={"Edit Category"}
+			btnTitle={"Update"}
+			error={
+				updateGenreError && "data" in updateGenreError
+					? updateGenreError.data.message
+					: ""
+			}
+			submit={handleSubmit(onSubmit)}
+		>
+			<div className={styles.adminContentFormBlock}>
+				<Input
+					label="Name"
+					{...register("name", {
+						required: true
+					})}
+					defaultValue={categoryData.data.name}
+				/>
+			</div>
 
-    return (
-        <AdminForm
-            title={'Edit Category'}
-            btnTitle={'Update'}
-            error={
-                updateGenreError && 'data' in updateGenreError ?
-                    updateGenreError.data.message : ''
-            }
-            submit={handleSubmit(onSubmit)}
-        >
-            <div className={styles.adminContentFormBlock}>
-                <p>
-                    Name
-                </p>
-                <Input register={{...register("name", {
-                        required: true
-                    })}} defaultValue={categoryData.data.name}/>
-            </div>
-            <div className={styles.adminContentFormBlock}>
-                <EditList
-                    title={'Genres'}
-                    list={categoryData?.data?.genres}
-                    deleteCallback={deleteGenreCallback}
-                    addCallback={addNewGenre}
-                    registerBtn={{...register("genre")}}
-                    messages={{
-                        success: addGenreData?.message,
-                        error: addGenreError&& 'data' in addGenreError ? addGenreError.data.message : ''
-                    }}
-                />
-            </div>
-        </AdminForm>
-    );
+			<div>
+				<h2>Genres</h2>
+				<div className={styles.genresList}>
+					{genreData.data.map((el) => (
+						<TransparentCheckbox
+							{...register("genreNames")}
+							defaultChecked={categoryData.data.genres?.some(
+								(genre) => genre.id === el.id
+							)}
+							value={el.name}
+							key={el.id}
+							title={el.name}
+						/>
+					))}
+				</div>
+			</div>
+		</AdminForm>
+	);
 };
 
 export default EditCategoryPage;
