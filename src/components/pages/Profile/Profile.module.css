@@ -12,10 +12,10 @@
 }
 
 .myAccountForm{
-    margin-top: 3em;
+    margin: 3em 0;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 1.5em;
 }
 
 

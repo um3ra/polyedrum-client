@@ -36,7 +36,7 @@ const Cart = () => {
             <div className={styles.cartBlockIcon} onClick={handleClick}>
                 <img src={CART} alt="cart" />
 
-                {cartData?.data.amountProducts !== 0 && (
+                {cartData?.data && cartData.data.amountProducts !== 0 && (
                     <span
                         className={clsx(
                             styles.amountProducts,

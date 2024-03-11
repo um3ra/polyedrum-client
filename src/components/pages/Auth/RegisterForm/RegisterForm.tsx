@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { IUser } from "../../../../@types/userType";
 import { setAuthData } from "../../../../store/auth/authSlice";
 import { useRegisterMutation } from "../../../../store/user/userAPI";
-import { Input, Button } from "../../../ui";
+import { Input, Button, SecondLoader } from "../../../ui";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const RegisterForm = () => {
         handleSubmit,
         reset
     } = useForm<IUser>({ mode: "onChange" });
-    const [userRegister, { data: authData, error: authError }] =
+    const [userRegister, { data: authData, isLoading, error: authError }] =
         useRegisterMutation();
 
     const onSubmit: SubmitHandler<IUser> = (data) => {
@@ -36,6 +36,8 @@ const RegisterForm = () => {
             navigate("/");
         }
     }, [authData, reset, navigate]);
+
+    if (isLoading) return <SecondLoader />;
 
     return (
         <div className={`fix-wrapper`}>

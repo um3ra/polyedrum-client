@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "../Auth.module.css";
 import { useDispatch } from "react-redux";
 import { IUser } from "../../../../@types/userType";
 import { setAuthData } from "../../../../store/auth/authSlice";
 import { useLoginMutation } from "../../../../store/user/userAPI";
-import { Input, Button } from "../../../ui";
+import { Input, Button, SecondLoader } from "../../../ui";
+import styles from "../Auth.module.css";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -17,7 +17,8 @@ const LoginForm = () => {
         handleSubmit,
         reset
     } = useForm<IUser>({ mode: "onChange" });
-    const [login, { data: authData, error: authError }] = useLoginMutation();
+    const [login, { data: authData, isLoading, error: authError }] =
+        useLoginMutation();
     const onSubmit: SubmitHandler<IUser> = (data) => {
         login({ email: data.email, password: data.password });
     };
@@ -29,6 +30,8 @@ const LoginForm = () => {
             navigate("/");
         }
     }, [authData]);
+
+    if (isLoading) return <SecondLoader />;
 
     return (
         <div className={`fix-wrapper`}>

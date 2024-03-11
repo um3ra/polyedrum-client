@@ -122,7 +122,9 @@ const MyAccount = () => {
                     </div>
                 )}
 
-                <Button>Update</Button>
+                <div>
+                    <Button>Update</Button>
+                </div>
             </form>
         </div>
     );

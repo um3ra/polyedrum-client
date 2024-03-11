@@ -17,9 +17,8 @@ import Checkout from "../pages/Checkout/Checkout";
 import Home from "../pages/Home/Home";
 import MyAccount from "../pages/Profile/MyAccount";
 import OrdersHistory from "../pages/Profile/OrdersHistory";
-import PersonalDetails from "../pages/Profile/PersonalDetails";
-import { Profile } from "../pages/Profile/Profile.1";
 import SingleBookPage from "../pages/SingleBookPage/SingleBookPage";
+import { Profile } from "../pages/Profile/Profile";
 
 const AppRouter = () => {
     return (
@@ -34,10 +33,6 @@ const AppRouter = () => {
             />
             <Route path={"/profile"} element={<Profile />}>
                 <Route index element={<MyAccount />} />
-                <Route
-                    path={"personal-details"}
-                    element={<PersonalDetails />}
-                />
                 <Route path={"orders-history"} element={<OrdersHistory />} />
             </Route>
             <Route path={"admin-panel"} element={<AdminPage />}>

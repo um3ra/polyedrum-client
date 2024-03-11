@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { ProfileNav } from "./ProfileNav/ProfileNav";
-import { Loader, WrapperWithNav } from "../../ui";
+import { SecondLoader, WrapperWithNav } from "../../ui";
 import { useGetUserProfileQuery } from "../../../store/user/userAPI";
 
 export const Profile = () => {
     const { data: profileData } = useGetUserProfileQuery(null);
 
     if (!profileData) {
-        return <Loader />;
+        return <SecondLoader />;
     }
     return (
         <WrapperWithNav
