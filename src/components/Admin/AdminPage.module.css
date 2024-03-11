@@ -1,5 +1,6 @@
 .wrapper{
     overflow-x: auto;
+    margin-bottom: 3em;
 }
 
 .adminBlock{
@@ -70,39 +71,3 @@
     gap: 1em;
     grid-template-columns: 1fr 1fr 1fr;
 }
-
-/* .genresList>*{
-    text-align: center;
-    padding: .5em;
-    border-radius: 10px;
-    background-color: hsl(var(--grey)/.3);
-} */
-
-/* .genresList input {
-    display: none;
-
-    &:checked {
-      + label {
-        background: #212121;
-        
-        + span {
-          color: #fafafa;
-        }
-      }
-    }
-}
-.genresListItem{
-    position: relative;
-} */
-
-/* .genresListItem input:checked+label {
-    background: #212121;
-}
-.genresListItem>label {
-    position: absolute;
-    top: 0; bottom: 0;
-    left: 0; right: 0;
-    background: #fafafa;
-    transition: background .2s ease-in-out;
-    cursor: pointer;
-} */
