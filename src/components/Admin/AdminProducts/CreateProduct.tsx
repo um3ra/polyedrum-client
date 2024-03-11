@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { SubmitHandler } from "react-hook-form";
-import { Loader } from "../../ui";
+import { SecondLoader } from "../../ui";
 import {
     useCreateProductMutation,
     useUploadProductImageMutation
@@ -45,7 +45,7 @@ const CreateProduct = () => {
     }, [isSuccess]);
 
     if (isLoading) {
-        return <Loader />;
+        return <SecondLoader />;
     }
 
     return (

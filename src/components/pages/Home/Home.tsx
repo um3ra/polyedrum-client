@@ -4,7 +4,7 @@ import { getAllProducts } from "../../../store/products/productsSlice";
 import { useAppDispatch } from "../../../store/store";
 import Banner from "../../Banner/Banner";
 import ProductsCarousel from "../../ProductCarousel/ProductsCarousel";
-import { Loader } from "../../ui";
+import { SecondLoader } from "../../ui";
 
 const Home = () => {
     const productList = useTypedSelector((state) => state.products.productList);
@@ -16,7 +16,7 @@ const Home = () => {
     }, [dispatch]);
 
     if (!productList || isLoading) {
-        return <Loader />;
+        return <SecondLoader />;
     }
 
     return (

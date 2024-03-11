@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetCartQuery } from "../../../store/cart/cartAPI";
 import { useCheckoutMutation } from "../../../store/order/orderAPI";
 import { useGetUserProfileQuery } from "../../../store/user/userAPI";
-import { Button, Loader, Modal } from "../../ui";
+import { Button, SecondLoader, Modal } from "../../ui";
 import styles from "./Checkout.module.css";
 
 const Checkout: React.FC = () => {
@@ -22,7 +22,7 @@ const Checkout: React.FC = () => {
     }, [isSuccess]);
 
     if (!cartData || !userData) {
-        return <Loader />;
+        return <SecondLoader />;
     }
 
     const modalClick = () => {

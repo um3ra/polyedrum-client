@@ -5,7 +5,7 @@ import {
     useGetCartQuery
 } from "../../../store/cart/cartAPI";
 import { useGetProductByNameQuery } from "../../../store/products/productsAPI";
-import { Button, Loader, Modal } from "../../ui";
+import { Button, Modal, SecondLoader } from "../../ui";
 import SingleBookDetails from "./SingleBookDetails";
 import styles from "./SingleBookPage.module.css";
 
@@ -28,7 +28,7 @@ const SingleBookPage = () => {
     }, [isSuccess]);
 
     if (!productData) {
-        return <Loader />;
+        return <SecondLoader />;
     }
 
     const handleClick = (id: number) => {
