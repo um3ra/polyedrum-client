@@ -4,10 +4,19 @@ import { Button } from "../ui";
 import { useAddProductToCartMutation } from "../../store/cart/cartAPI";
 import { IProductsItem } from "../../@types/productType";
 import styles from "./Product.module.css";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 const Product = ({ id, title, price, img, author }: IProductsItem) => {
     const [addProduct, { isLoading }] = useAddProductToCartMutation();
     const navigate = useNavigate();
+    const isLoggedIn = useTypedSelector((state) => state.auth.isLoggedIn);
+
+    const handleClick = () => {
+        if (!isLoggedIn) {
+            return navigate("/login");
+        }
+        id && addProduct(id);
+    };
 
     return (
         <div>
@@ -27,7 +36,7 @@ const Product = ({ id, title, price, img, author }: IProductsItem) => {
                 </div>
                 <Button
                     disabled={isLoading}
-                    onClick={() => id && addProduct(id)}
+                    onClick={handleClick}
                     addClass={styles.collectionCardBtn}
                 >
                     <img src={CART} alt={"cart"} />

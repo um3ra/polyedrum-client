@@ -10,8 +10,8 @@
     padding: .4em;
     border-radius: 5px;
     box-shadow: 0 2px 4px 1px hsl(var(--grey)/.5);
-    border: none;
-}
+    border: 2px solid hsl(var(--grey)/.5);
+}   
 
 .input:hover{
     border-color: var(--black-pearl);
